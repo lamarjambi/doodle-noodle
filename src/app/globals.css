@@ -1,15 +1,25 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Chalk Drawings';
+  src: url('/fonts/ChalkDrawings-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --font-riscada: 'Chalk Drawings', cursive, sans-serif;
 }
 
-@theme inline {
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-family-riscada: 'Chalk Drawings', cursive, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,5 +32,10 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Chalk Drawings, Helvetica, sans-serif;
+}
+
+/*backup*/
+.font-riscada {
+  font-family: 'Chalk Drawings', cursive, sans-serif !important;
 }
