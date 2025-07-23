@@ -28,12 +28,12 @@ export default function CharacterPage() {
             <img 
               src="/text-shadow.PNG" 
               alt="Shadow" 
-              className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 translate-x-5 -translate-y-3.5 scale-110"
+              className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 translate-x-5 -translate-y-3.5 scale-107"
             />
             <img 
               src="/text-bg.PNG" 
               alt="background" 
-              className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 -translate-y-9 rotate-3 scale-110"
+              className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 -translate-y-9 rotate-3 scale-107"
             />
             <div className="p-8 transform -rotate-1 relative z-10">
 
