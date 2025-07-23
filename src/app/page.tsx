@@ -82,6 +82,12 @@ export default function Home() {
                       className="absolute inset-0 transition-opacity duration-300 opacity-0 group-hover:opacity-100 object-contain w-full h-full"
                     />
                   </span>
+                  {/* Overlay text on hover */}
+                  <span className="absolute inset-0 flex flex-col items-center justify-center z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span className="text-2xl md:text-3xl font-medium text-blue-800 font-riscada px-6 py-3">
+                      Character Design
+                    </span>
+                  </span>
                 </button>
                 {/* Scene Illustration Button */}
                 <button 
@@ -102,6 +108,12 @@ export default function Home() {
                       className="absolute inset-0 transition-opacity duration-300 opacity-0 group-hover:opacity-100 object-contain w-full h-full"
                     />
                   </span>
+                  {/* Overlay text on hover */}
+                  <span className="absolute inset-0 flex flex-col items-center justify-center z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span className="text-2xl md:text-3xl font-medium text-blue-800 font-riscada px-6 py-3">
+                      Scene Illustration
+                    </span>
+                  </span>
                 </button>
                 {/* Comic Strip Button */}
                 <button 
@@ -121,6 +133,12 @@ export default function Home() {
                       alt="Comic Strip Hover" 
                       className="absolute inset-0 transition-opacity duration-300 opacity-0 group-hover:opacity-100 object-contain w-full h-full"
                     />
+                  </span>
+                  {/* Overlay text on hover */}
+                  <span className="absolute inset-0 flex flex-col items-center justify-center z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span className="text-2xl md:text-3xl font-medium text-blue-800 font-riscada px-6 py-3">
+                      Comic Strip
+                    </span>
                   </span>
                 </button>
               </div>
