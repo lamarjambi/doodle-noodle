@@ -2,30 +2,52 @@ import React from 'react';
 
 export default function CharacterPage() {
   return (
-    <div className="min-h-screen bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/notebook-bg.PNG')" }}>
+    <div 
+      className="min-h-screen bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage: "url('/notebook-bg.PNG')"
+      }}
+    >
+
+      {/* Header */}
       <header className="relative z-10 p-6 ml-20">
         <div className="flex items-center justify-center">
           <img src="/logo.PNG" alt="Logo" className="h-26 w-auto mr-4" />
-          <h1 className="text-5xl md:text-8xl font-normal text-blue-800 tracking-wide font-chalk transform -rotate-1">Doodle Noodle</h1>
+          <h1 className="text-5xl md:text-8xl font-normal text-blue-800 tracking-wide font-chalk transform -rotate-1">
+            Doodle Noodle
+          </h1>
         </div>
-        <p className="text-center text-blue-700 mt-2 font-riscada text-3xl transform rotate-1">For Artists, By An Artist</p>
+        <p className="text-center text-blue-700 mt-2 font-riscada text-3xl transform rotate-1">
+          For Artists, By An Artist
+        </p>
       </header>
+      
       <main className="relative z-10 max-w-4xl mx-auto px-6 pb-20 ml-20">
+
         <div className="relative">
-          <img src="/text-shadow.PNG" alt="Shadow" className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 scale-180 translate-x-4.5 translate-y-26" />
-          <img src="/text-bg.PNG" alt="background" className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 rotate-3 scale-180 translate-y-20" />
-          <div className="p-8 transform -rotate-1 relative z-10">
+            <img 
+              src="/text-shadow.PNG" 
+              alt="Shadow" 
+              className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 translate-x-5.5 -translate-y-3 scale-109"
+            />
+            <img 
+              src="/text-bg.PNG" 
+              alt="background" 
+              className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 -translate-y-9 rotate-3 scale-109"
+            />
+            <div className="p-8 transform -rotate-1 relative z-10">
+
             <div className="absolute inset-0 opacity-20 pointer-events-none">
               {[...Array(15)].map((_, i) => (<div key={i} className="border-b border-blue-200 h-8"></div>))}
             </div>
             <div className="flex items-center mb-6 relative z-10">
-              <a href="/" className="text-blue-800 hover:text-blue-600 text-3xl mr-4 p-2 rounded-full hover:bg-blue-100 transition-all font-riscada">←</a>
-              <h2 className="text-3xl font-medium text-blue-800 font-riscada">📝 Character Design Details</h2>
+              <a href="/" className="text-blue-800 hover:text-blue-600 text-3xl mr-4 p-2 rounded-full hover:bg-blue-100 transition-all font-riscada rotate-4">←</a>
+              <h2 className="text-3xl font-medium text-blue-800 rotate-4 font-riscada translate-y-3">Character Design Details :3</h2>
             </div>
             <div className="grid md:grid-cols-2 gap-6 relative z-10">
               <div>
-                <label className="block text-blue-800 font-medium mb-3 text-xl font-riscada transform -rotate-1">📚 Genre</label>
-                <select className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all transform rotate-1">
+                <label className="block text-blue-800 font-medium mb-3 text-xl font-riscada transform translate-x-2 rotate-4">Genre</label>
+                <select className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada rotate-4 text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all transform rotate-1">
                   <option>Choose a genre...</option>
                   <option>Fantasy</option>
                   <option>Cyberpunk</option>
@@ -40,7 +62,7 @@ export default function CharacterPage() {
                 </select>
               </div>
               <div>
-                <label className="block text-blue-800 font-medium mb-3 text-xl font-riscada transform rotate-1">✨ Tone</label>
+                <label className="block text-blue-800 font-medium mb-3 text-xl font-riscada transform rotate-1">Tone</label>
                 <select className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all transform -rotate-1">
                   <option>Pick a tone...</option>
                   <option>Whimsical</option>
@@ -56,21 +78,21 @@ export default function CharacterPage() {
                 </select>
               </div>
               <div>
-                <label className="block text-blue-800 font-medium mb-3 text-xl font-riscada transform rotate-1">💭 Emotion</label>
+                <label className="block text-blue-800 font-medium mb-3 text-xl font-riscada transform rotate-1">Emotion</label>
                 <input type="text" placeholder="joy, melancholy, excitement, wonder..." className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all placeholder-blue-500 transform -rotate-1" />
               </div>
               <div>
-                <label className="block text-blue-800 font-medium mb-3 text-xl font-riscada transform -rotate-1">🎨 Color Palette <span className="text-base font-normal text-blue-600">(Optional)</span></label>
+                <label className="block text-blue-800 font-medium mb-3 text-xl font-riscada transform -rotate-1">Color Palette <span className="text-base font-normal text-blue-600">(Optional)</span></label>
                 <input type="text" placeholder="warm pastels, neon, monochrome, earth tones..." className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all placeholder-blue-500 transform rotate-1" />
               </div>
             </div>
             <div className="mt-6 relative z-10">
-              <label className="block text-blue-800 font-medium mb-3 text-xl font-riscada transform rotate-1">🔗 Keywords <span className="text-base font-normal text-blue-600">(Optional)</span></label>
+              <label className="block text-blue-800 font-medium mb-3 text-xl font-riscada transform rotate-1">Keywords <span className="text-base font-normal text-blue-600">(Optional)</span></label>
               <input type="text" placeholder="magic, forest, glowing eyes, ancient ruins, flowing cape..." className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all placeholder-blue-500 transform -rotate-1" />
             </div>
             <div className="mt-8 text-center relative z-10">
               <button className="group relative px-8 py-4 bg-blue-600 hover:bg-blue-700 rounded-lg text-white font-medium text-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-2 border-blue-800 font-riscada rotate-1 hover:rotate-0">
-                <span className="relative z-10">✏️ Generate Prompt & Mood Board</span>
+                <span className="relative z-10">Generate Prompt & Mood Board</span>
               </button>
             </div>
           </div>
