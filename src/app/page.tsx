@@ -1,12 +1,14 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
   const [selectedType, setSelectedType] = useState<string | null>(null);
+  const router = useRouter();
 
   const handleTypeSelect = (type: string) => {
-    setSelectedType(type);
+    router.push(`/${type}`);
   };
 
   const handleBack = () => {
@@ -51,12 +53,6 @@ export default function Home() {
               className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 rotate-3 scale-180 translate-y-20"
             />
             <div className="p-8 transform -rotate-1 relative z-10">
-              {/* Notebook paper lines effect */}
-              <div className="absolute inset-0 opacity-20 pointer-events-none">
-                {[...Array(15)].map((_, i) => (
-                  <div key={i} className="border-b border-blue-200 h-8"></div>
-                ))}
-              </div>
               
               <h2 className="text-4xl font-medium text-blue-800 mb-8 text-center font-riscada relative z-10 transform rotate-4 translate-y-4.5">
                 What would you like to create?
