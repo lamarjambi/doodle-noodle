@@ -25,11 +25,11 @@ export default function Home() {
       <header className="relative z-10 p-6 ml-20">
         <div className="flex items-center justify-center">
           <img src="/logo.PNG" alt="Logo" className="h-26 w-auto mr-4" />
-          <h1 className="text-5xl md:text-7xl font-normal text-blue-800 tracking-wide font-chalk transform -rotate-1">
+          <h1 className="text-5xl md:text-8xl font-normal text-blue-800 tracking-wide font-chalk transform -rotate-1">
             Doodle Noodle
           </h1>
         </div>
-        <p className="text-center text-blue-700 text-lg mt-2 font-riscada text-2xl transform rotate-1">
+        <p className="text-center text-blue-700 mt-2 font-riscada text-3xl transform rotate-1">
           For Artists, By An Artist
         </p>
       </header>
@@ -63,31 +63,65 @@ export default function Home() {
               </h2>
               
               <div className="grid md:grid-cols-3 gap-6 relative z-10">
+                {/* Character Design Button */}
                 <button 
                   onClick={() => handleTypeSelect('character')}
-                  className="group bg-white/95 rounded-xl p-6 border-2 border-blue-200 hover:scale-105 transition-all duration-300 hover:shadow-lg text-center transform rotate-5 hover:rotate-0 hover:bg-blue-50 translate-y-6"
+                  className="group bg-transparent rounded-xl p-0 border-none shadow-none text-center transform rotate-5 hover:rotate-0 transition-all duration-300 focus:outline-none relative overflow-hidden translate-y-6"
+                  style={{ minHeight: '220px' }}
+                  aria-label="Character Design"
                 >
-                  <div className="text-5xl mb-3">👤</div>
-                  <h3 className="text-xl font-medium text-blue-800 mb-2 font-riscada">Character Design</h3>
-                  <p className="text-blue-600 font-riscada text-lg">Create detailed character prompts with personality and visual elements</p>
+                  <span className="absolute inset-0 z-0">
+                    <img 
+                      src="/character.PNG" 
+                      alt="Character Design" 
+                      className="transition-opacity duration-300 group-hover:opacity-0 object-contain w-full h-full"
+                    />
+                    <img 
+                      src="/character-folded.PNG" 
+                      alt="Character Design Hover" 
+                      className="absolute inset-0 transition-opacity duration-300 opacity-0 group-hover:opacity-100 object-contain w-full h-full"
+                    />
+                  </span>
                 </button>
-                
+                {/* Scene Illustration Button */}
                 <button 
                   onClick={() => handleTypeSelect('scene')}
-                  className="group bg-white/95 rounded-xl p-6 border-2 border-blue-200 hover:scale-105 transition-all duration-300 hover:shadow-lg text-center transform -rotate-4 hover:rotate-0 hover:bg-blue-50 translate-y-7"
+                  className="group bg-transparent rounded-xl p-0 border-none shadow-none text-center transform -rotate-4 hover:rotate-0 transition-all duration-300 focus:outline-none relative overflow-hidden translate-y-7"
+                  style={{ minHeight: '220px' }}
+                  aria-label="Scene Illustration"
                 >
-                  <div className="text-5xl mb-3">🌄</div>
-                  <h3 className="text-xl font-medium text-blue-800 mb-2 font-riscada">Scene Illustration</h3>
-                  <p className="text-blue-600 font-riscada text-lg">Generate atmospheric scenes and environments for your art</p>
+                  <span className="absolute inset-0 z-0">
+                    <img 
+                      src="/scene.PNG" 
+                      alt="Scene Illustration" 
+                      className="transition-opacity duration-300 group-hover:opacity-0 object-contain w-full h-full"
+                    />
+                    <img 
+                      src="/scene-folded.PNG" 
+                      alt="Scene Illustration Hover" 
+                      className="absolute inset-0 transition-opacity duration-300 opacity-0 group-hover:opacity-100 object-contain w-full h-full"
+                    />
+                  </span>
                 </button>
-                
+                {/* Comic Strip Button */}
                 <button 
                   onClick={() => handleTypeSelect('comic')}
-                  className="group bg-white/95 rounded-xl p-6 border-2 border-blue-200 hover:scale-105 transition-all duration-300 hover:shadow-lg text-center transform rotate-8 hover:rotate-0 hover:bg-blue-50 translate-y-12"
+                  className="group bg-transparent rounded-xl p-0 border-none shadow-none text-center transform rotate-8 hover:rotate-0 transition-all duration-300 focus:outline-none relative overflow-hidden translate-y-12"
+                  style={{ minHeight: '220px' }}
+                  aria-label="Comic Strip"
                 >
-                  <div className="text-5xl mb-3">📚</div>
-                  <h3 className="text-xl font-medium text-blue-800 mb-2 font-riscada">Comic Strip</h3>
-                  <p className="text-blue-600 font-riscada text-lg">Create comic panels with story beats and visual storytelling</p>
+                  <span className="absolute inset-0 z-0">
+                    <img 
+                      src="/comic.PNG" 
+                      alt="Comic Strip" 
+                      className="transition-opacity duration-300 group-hover:opacity-0 object-contain w-full h-full"
+                    />
+                    <img 
+                      src="/comic-folded.PNG" 
+                      alt="Comic Strip Hover" 
+                      className="absolute inset-0 transition-opacity duration-300 opacity-0 group-hover:opacity-100 object-contain w-full h-full"
+                    />
+                  </span>
                 </button>
               </div>
             </div>
