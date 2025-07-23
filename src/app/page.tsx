@@ -43,7 +43,7 @@ export default function Home() {
             <img 
               src="/text-shadow.PNG" 
               alt="Shadow" 
-              className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0  scale-180 translate-x-4 translate-y-26"
+              className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0  scale-180 translate-x-4.5 translate-y-26"
             />
             <img 
               src="/text-bg.PNG" 
