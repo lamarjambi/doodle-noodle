@@ -41,6 +41,11 @@ export default function Home() {
           /* Type Selection Screen */
           <div className="relative">
             <img 
+              src="/text-shadow.PNG" 
+              alt="Shadow" 
+              className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 -rotate-2 scale-180 -translate-x-3 translate-y-26"
+            />
+            <img 
               src="/text-bg.PNG" 
               alt="background" 
               className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 rotate-3 scale-180 translate-y-20"
