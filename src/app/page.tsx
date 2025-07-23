@@ -24,6 +24,7 @@ export default function Home() {
       {/* Header */}
       <header className="relative z-10 p-6 ml-20">
         <div className="flex items-center justify-center">
+          <img src="/logo.PNG" alt="Logo" className="h-26 w-auto mr-4" />
           <h1 className="text-5xl md:text-7xl font-normal text-blue-800 tracking-wide font-chalk transform -rotate-1">
             Doodle Noodle
           </h1>
@@ -52,14 +53,14 @@ export default function Home() {
                 ))}
               </div>
               
-              <h2 className="text-4xl font-medium text-blue-800 mb-8 text-center font-riscada relative z-10 transform rotate-3">
+              <h2 className="text-4xl font-medium text-blue-800 mb-8 text-center font-riscada relative z-10 transform rotate-4 translate-y-4.5">
                 What would you like to create?
               </h2>
               
               <div className="grid md:grid-cols-3 gap-6 relative z-10">
                 <button 
                   onClick={() => handleTypeSelect('character')}
-                  className="group bg-white/95 rounded-xl p-6 border-2 border-blue-200 hover:scale-105 transition-all duration-300 hover:shadow-lg text-center transform rotate-2 hover:rotate-0 hover:bg-blue-50"
+                  className="group bg-white/95 rounded-xl p-6 border-2 border-blue-200 hover:scale-105 transition-all duration-300 hover:shadow-lg text-center transform rotate-5 hover:rotate-0 hover:bg-blue-50 translate-y-6"
                 >
                   <div className="text-5xl mb-3">👤</div>
                   <h3 className="text-xl font-medium text-blue-800 mb-2 font-riscada">Character Design</h3>
@@ -68,7 +69,7 @@ export default function Home() {
                 
                 <button 
                   onClick={() => handleTypeSelect('scene')}
-                  className="group bg-white/95 rounded-xl p-6 border-2 border-blue-200 hover:scale-105 transition-all duration-300 hover:shadow-lg text-center transform -rotate-1 hover:rotate-0 hover:bg-blue-50"
+                  className="group bg-white/95 rounded-xl p-6 border-2 border-blue-200 hover:scale-105 transition-all duration-300 hover:shadow-lg text-center transform -rotate-4 hover:rotate-0 hover:bg-blue-50 translate-y-7"
                 >
                   <div className="text-5xl mb-3">🌄</div>
                   <h3 className="text-xl font-medium text-blue-800 mb-2 font-riscada">Scene Illustration</h3>
@@ -77,7 +78,7 @@ export default function Home() {
                 
                 <button 
                   onClick={() => handleTypeSelect('comic')}
-                  className="group bg-white/95 rounded-xl p-6 border-2 border-blue-200 hover:scale-105 transition-all duration-300 hover:shadow-lg text-center transform rotate-1 hover:rotate-0 hover:bg-blue-50"
+                  className="group bg-white/95 rounded-xl p-6 border-2 border-blue-200 hover:scale-105 transition-all duration-300 hover:shadow-lg text-center transform rotate-8 hover:rotate-0 hover:bg-blue-50 translate-y-12"
                 >
                   <div className="text-5xl mb-3">📚</div>
                   <h3 className="text-xl font-medium text-blue-800 mb-2 font-riscada">Comic Strip</h3>
