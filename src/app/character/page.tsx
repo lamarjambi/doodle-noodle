@@ -28,26 +28,39 @@ export default function CharacterPage() {
             <img 
               src="/text-shadow.PNG" 
               alt="Shadow" 
-              className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 translate-x-5.5 -translate-y-3 scale-109"
+              className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 translate-x-5 -translate-y-3.5 scale-110"
             />
             <img 
               src="/text-bg.PNG" 
               alt="background" 
-              className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 -translate-y-9 rotate-3 scale-109"
+              className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 -translate-y-9 rotate-3 scale-110"
             />
             <div className="p-8 transform -rotate-1 relative z-10">
 
             <div className="absolute inset-0 opacity-20 pointer-events-none">
               {[...Array(15)].map((_, i) => (<div key={i} className="border-b border-blue-200 h-8"></div>))}
             </div>
+
             <div className="flex items-center mb-6 relative z-10">
-              <a href="/" className="text-blue-800 hover:text-blue-600 text-3xl mr-4 p-2 rounded-full hover:bg-blue-100 transition-all font-riscada rotate-4">←</a>
-              <h2 className="text-3xl font-medium text-blue-800 rotate-4 font-riscada translate-y-3">Character Design Details :3</h2>
+              <a href="/" className="transition-all rotate-4 translate-x-4 -translate-y-6 group" aria-label="Back">
+                <img 
+                  src="/back.PNG" 
+                  alt="Back" 
+                  className="w-8 h-8 transition-opacity duration-200 group-hover:opacity-0"
+                />
+                <img 
+                  src="/back-hover.PNG" 
+                  alt="Back Hover" 
+                  className="w-8 h-8 absolute top-0 left-0 duration-200 opacity-0 group-hover:opacity-100"
+                  style={{ pointerEvents: 'none' }}
+                />
+              </a>
+              <h2 className="text-3xl font-medium text-blue-800 rotate-3 font-riscada translate-x-7 -translate-y-4">Character Design Details :3</h2>
             </div>
             <div className="grid md:grid-cols-2 gap-6 relative z-10">
               <div>
-                <label className="block text-blue-800 font-medium mb-3 text-xl font-riscada transform translate-x-2 rotate-4">Genre</label>
-                <select className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada rotate-4 text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all transform rotate-1">
+                <label className="block text-blue-800 font-medium mb-3 text-xl font-riscada transform -translate-y-3 translate-x-3 rotate-5">Genre</label>
+                <select className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada -translate-y-5 rotate-4 text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all transform rotate-1">
                   <option>Choose a genre...</option>
                   <option>Fantasy</option>
                   <option>Cyberpunk</option>
@@ -62,8 +75,8 @@ export default function CharacterPage() {
                 </select>
               </div>
               <div>
-                <label className="block text-blue-800 font-medium mb-3 text-xl font-riscada transform rotate-1">Tone</label>
-                <select className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all transform -rotate-1">
+                <label className="block text-blue-800 font-medium mb-3 text-xl font-riscada transform -rotate-1 -translate-y-1">Tone</label>
+                <select className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all transform -translate-y-2 -rotate-1">
                   <option>Pick a tone...</option>
                   <option>Whimsical</option>
                   <option>Creepy</option>
@@ -78,21 +91,31 @@ export default function CharacterPage() {
                 </select>
               </div>
               <div>
-                <label className="block text-blue-800 font-medium mb-3 text-xl font-riscada transform rotate-1">Emotion</label>
-                <input type="text" placeholder="joy, melancholy, excitement, wonder..." className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all placeholder-blue-500 transform -rotate-1" />
+                <label className="block text-blue-800 font-medium mb-3 text-xl font-riscada transform -rotate-1 translate-x-1 -translate-y-6">Emotion</label>
+                <input type="text" placeholder="joy, melancholy, excitement, wonder..." className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800  font-riscada text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all placeholder-blue-500 transform -translate-y-7 -rotate-1" />
               </div>
               <div>
-                <label className="block text-blue-800 font-medium mb-3 text-xl font-riscada transform -rotate-1">Color Palette <span className="text-base font-normal text-blue-600">(Optional)</span></label>
-                <input type="text" placeholder="warm pastels, neon, monochrome, earth tones..." className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all placeholder-blue-500 transform rotate-1" />
+                <label className="block text-blue-800 font-medium mb-3 text-xl font-riscada transform translate-x-1 -translate-y-1 rotate-4">Color Palette <span className="text-base font-normal text-blue-600">(Optional)</span></label>
+                <input type="text" placeholder="warm pastels, neon, monochrome, earth tones..." className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all placeholder-blue-500 transform -translate-y-2 -translate-x-1 rotate-4" />
               </div>
             </div>
             <div className="mt-6 relative z-10">
-              <label className="block text-blue-800 font-medium mb-3 text-xl font-riscada transform rotate-1">Keywords <span className="text-base font-normal text-blue-600">(Optional)</span></label>
-              <input type="text" placeholder="magic, forest, glowing eyes, ancient ruins, flowing cape..." className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all placeholder-blue-500 transform -rotate-1" />
+              <label className="block text-blue-800 font-medium mb-3 text-xl font-riscada transform rotate-1 -translate-y-3 translate-x-1">Keywords <span className="text-base font-normal text-blue-600">(Optional)</span></label>
+              <input type="text" placeholder="magic, forest, glowing eyes, ancient ruins, flowing cape..." className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all placeholder-blue-500 transform -translate-y-4 -translate-x-1 rotate-1" />
             </div>
-            <div className="mt-8 text-center relative z-10">
-              <button className="group relative px-8 py-4 bg-blue-600 hover:bg-blue-700 rounded-lg text-white font-medium text-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-2 border-blue-800 font-riscada rotate-1 hover:rotate-0">
-                <span className="relative z-10">Generate Prompt & Mood Board</span>
+            <div className="mt-8 text-center relative z-10 translate-x-1">
+              <button className="group relative hover:scale-105 transition-all duration-300 rotate-1 hover:rotate-0 bg-transparent focus:outline-none -translate-y-4" aria-label="Generate Prompt & Mood Board">
+                <img 
+                  src="/generate.PNG" 
+                  alt="Generate Prompt & Mood Board" 
+                  className="w-48 h-auto scale-120 transition-opacity duration-200 group-hover:opacity-0"
+                />
+                <img 
+                  src="/generate-hover.PNG" 
+                  alt="Generate Prompt & Mood Board Hover" 
+                  className="absolute top-0 left-0 duration-200 opacity-0 group-hover:opacity-100 scale-120"
+                  style={{ pointerEvents: 'none' }}
+                />
               </button>
             </div>
           </div>
