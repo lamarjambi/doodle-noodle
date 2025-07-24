@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function ComicPage() {
   return (
-    <div className="min-h-screen bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/notebook-bg.PNG')" }}>
+    <div className="min-h-screen bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/img/notebook-bg.PNG')" }}>
       <header className="relative z-10 p-6 ml-20">
         <div className="flex items-center justify-center">
           <img src="/img/logo.PNG" alt="Logo" className="h-26 w-auto mr-4" />
