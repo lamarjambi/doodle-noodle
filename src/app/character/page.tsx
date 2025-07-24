@@ -233,11 +233,11 @@ export default function CharacterPage() {
               </div>
               <div>
                 <label className="block text-blue-800 font-medium mb-3 text-2xl font-riscada transform -translate-y-3 -translate-x-22 rotate-1">Keywords <span className="text-lg font-normal text-blue-600">(Optional)</span></label>
-                <input type="text" value={emotion} onChange={e => setEmotion(e.target.value)} placeholder="joy, melancholy, excitement, wonder..." className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all placeholder-blue-500 transform -translate-y-7 -translate-x-22.5 -rotate-1" />
+                <input type="text" value={emotion} onChange={e => setEmotion(e.target.value)} placeholder="magic, forest..." className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all placeholder-blue-500 transform -translate-y-7 -translate-x-22.5 -rotate-1" />
               </div>
               <div>
                 <label className="block text-blue-800 font-medium mb-3 text-2xl font-riscada transform rotate-3 -translate-x-22">Color Palette <span className="text-lg font-normal text-blue-600">(Optional)</span></label>
-                <input type="text" value={palette} onChange={e => setPalette(e.target.value)} placeholder="warm pastels, neon, monochrome, earth tones..." className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all placeholder-blue-500 transform -translate-y-2 -translate-x-22.5 rotate-4" />
+                <input type="text" value={palette} onChange={e => setPalette(e.target.value)} placeholder="pastels, neon, earth tones..." className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all placeholder-blue-500 transform -translate-y-2 -translate-x-22.5 rotate-4" />
               </div>
             </div>
             <div className="mt-8 text-center relative z-10 translate-x-1">
