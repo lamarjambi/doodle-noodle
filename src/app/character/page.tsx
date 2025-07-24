@@ -1,58 +1,60 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function CharacterPage() {
-  // Segmented corpora for genre and tone
-  const genreCorpora: Record<string, string> = {
-    Fantasy: `A wizard with a silver staff casts spells in a misty forest. A dragon sleeps beneath the mountain. Elves whisper secrets in the ancient trees. A magical sword glows with runes. A brave knight rides into the unknown.`,
-    Cyberpunk: `Neon lights flicker in the rain-soaked city. Hackers type furiously in dark rooms. Augmented eyes scan the crowd. A rogue AI plots in the shadows. Chrome limbs glint under streetlights.`,
-    Horror: `A chill wind howls through the abandoned house. Shadows move where they shouldn't. Eyes glint in the darkness. A scream echoes in the night. The candle flickers, barely holding back the gloom.`,
-    // Romance: `Two souls meet under a starlit sky. A gentle touch sparks a thousand feelings. Letters are exchanged in secret. Hearts race in the quiet moments. Love blooms in unexpected places.`,
-    Adventure: `A map flutters in the explorer's hand. The jungle teems with unknown sounds. A treasure chest waits beneath the waves. Boots crunch on ancient ruins. The horizon calls to the brave.`,
-    'Post-Apocalyptic': `Ruins stretch as far as the eye can see. Survivors scavenge for supplies. Hope glimmers in the darkness. A radio crackles with static. The world is silent, but not empty.`,
-  };
-
-  const toneCorpora: Record<string, string> = {
-    Whimsical: `Clouds shaped like animals drift across the sky. Laughter bubbles up for no reason. Shoes squeak on polished floors. The world feels light and full of possibility.`,
-    Creepy: `Footsteps echo in the empty hallway. Dolls stare with glassy eyes. The air is thick with secrets. Whispers come from the walls.`,
-    Dramatic: `Thunder cracks as the hero falls to their knees. Tears mix with rain. Every word is heavy with meaning. The spotlight finds the truth.`,
-    Peaceful: `A gentle breeze stirs the grass. Sunlight warms closed eyes. Birds sing in the distance. Everything is calm and still.`,
-    Mysterious: `A locked door waits at the end of the hall. Shadows flicker in candlelight. A riddle is carved into stone. Eyes watch from the darkness.`
-  };
+  // Remove hardcoded corpora
 
   // Default corpus if nothing is selected
   const defaultCorpus = `A quirky character with glowing eyes and a mysterious past. Their flowing cape catches the wind as they leap across rooftops. A gentle smile hides a world of secrets. Magic shimmers at their fingertips, and laughter follows wherever they go. Shadows linger, but hope is never far behind.`;
 
-  // Markov chain (bigram) implementation
-  function buildMarkovChain(text: string): Record<string, string[]> {
-    const words = text.split(/\s+/);
+  // Markov chain (trigram) implementation
+  function buildMarkovChain(text: string): { chain: Record<string, string[]>, starts: string[] } {
+    const lines = text.split(/\n+/).map(line => line.trim()).filter(Boolean);
     const chain: Record<string, string[]> = {};
-    for (let i = 0; i < words.length - 2; i++) {
-      const key = words[i] + ' ' + words[i + 1];
-      const next = words[i + 2];
-      if (!chain[key]) chain[key] = [];
-      chain[key].push(next);
+    const starts: string[] = [];
+    for (const line of lines) {
+      const words = line.split(/\s+/);
+      if (words.length < 4) continue;
+      // Store the first three words as a possible start
+      starts.push(words.slice(0, 3).join(' '));
+      for (let i = 0; i < words.length - 3; i++) {
+        const key = words[i] + ' ' + words[i + 1] + ' ' + words[i + 2];
+        const next = words[i + 3];
+        if (!chain[key]) chain[key] = [];
+        chain[key].push(next);
+      }
     }
-    return chain;
+    return { chain, starts };
   }
 
-  function generateMarkovText(chain: Record<string, string[]>, length: number = 20): string {
-    const keys = Object.keys(chain);
-    let key = keys[Math.floor(Math.random() * keys.length)];
+  function generateMarkovText(chain: Record<string, string[]>, starts: string[], length: number = 30): string {
+    if (starts.length === 0) return '';
+    let key = starts[Math.floor(Math.random() * starts.length)];
     let result = key.split(' ');
-    for (let i = 0; i < length - 2; i++) {
+    for (let i = 0; i < length - 3; i++) {
       const nextWords = chain[key];
       if (!nextWords || nextWords.length === 0) {
-        key = keys[Math.floor(Math.random() * keys.length)];
+        // Restart from a sentence beginning
+        key = starts[Math.floor(Math.random() * starts.length)];
         result.push(...key.split(' '));
-        i++;
+        i += 2;
         continue;
       }
       const next = nextWords[Math.floor(Math.random() * nextWords.length)];
       result.push(next);
-      key = result[result.length - 2] + ' ' + result[result.length - 1];
+      key = result[result.length - 3] + ' ' + result[result.length - 2] + ' ' + result[result.length - 1];
     }
     return result.join(' ');
+  }
+
+  // Post-process: split into sentences, filter for complete, capitalized, properly punctuated ones
+  function extractValidSentences(text: string, maxCount: number = 2): string {
+    // Split on period, exclamation, or question mark followed by space or end of string
+    const sentences = text.match(/[^.!?]*[.!?]/g) || [];
+    const valid = sentences
+      .map(s => s.trim())
+      .filter(s => s.length > 10 && /^[A-Z]/.test(s) && /[.!?]$/.test(s));
+    return valid.slice(0, maxCount).join(' ');
   }
 
   // Post-process the generated prompt for basic grammar
@@ -76,17 +78,51 @@ export default function CharacterPage() {
   const [palette, setPalette] = useState('');
   const [keywords, setKeywords] = useState('');
 
+  // New: State for loaded corpora
+  const [genreCorpus, setGenreCorpus] = useState('');
+  const [toneCorpus, setToneCorpus] = useState('');
+  const [loadingGenre, setLoadingGenre] = useState(false);
+  const [loadingTone, setLoadingTone] = useState(false);
+
+  // Fetch genre corpus when genre changes
+  useEffect(() => {
+    if (!genre || genre === 'Choose a genre...') {
+      setGenreCorpus('');
+      return;
+    }
+    setLoadingGenre(true);
+    fetch(`/corpora/character/${genre.toLowerCase().replace(/ /g, '-')}.txt`)
+      .then(res => res.ok ? res.text() : '')
+      .then(text => setGenreCorpus(text))
+      .catch(() => setGenreCorpus(''))
+      .finally(() => setLoadingGenre(false));
+  }, [genre]);
+
+  // Fetch tone corpus when tone changes
+  useEffect(() => {
+    if (!tone || tone === 'Pick a tone...') {
+      setToneCorpus('');
+      return;
+    }
+    setLoadingTone(true);
+    fetch(`/corpora/character/${tone.toLowerCase().replace(/ /g, '-')}.txt`)
+      .then(res => res.ok ? res.text() : '')
+      .then(text => setToneCorpus(text))
+      .catch(() => setToneCorpus(''))
+      .finally(() => setLoadingTone(false));
+  }, [tone]);
+
   const handleGenerate = () => {
     let userCorpus = '';
-    if (genre && genreCorpora[genre]) userCorpus += genreCorpora[genre] + ' ';
-    if (tone && toneCorpora[tone]) userCorpus += toneCorpora[tone] + ' ';
+    if (genreCorpus) userCorpus += genreCorpus + '\n';
+    if (toneCorpus) userCorpus += toneCorpus + '\n';
     if (!userCorpus) userCorpus = defaultCorpus;
     if (emotion) userCorpus += ` ${emotion}`;
     if (palette) userCorpus += ` ${palette}`;
     if (keywords) userCorpus += ` ${keywords}`;
-    const chain = buildMarkovChain(userCorpus);
-    let markovPrompt = generateMarkovText(chain, 24);
-    markovPrompt = postProcessPrompt(markovPrompt);
+    const { chain, starts } = buildMarkovChain(userCorpus);
+    let markovRaw = generateMarkovText(chain, starts, 36);
+    let markovPrompt = extractValidSentences(markovRaw, 2);
     setPrompt(markovPrompt);
   };
 
