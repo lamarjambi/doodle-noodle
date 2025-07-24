@@ -5,7 +5,7 @@ export default function ScenePage() {
     <div className="min-h-screen bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/notebook-bg.PNG')" }}>
       <header className="relative z-10 p-6 ml-20">
         <div className="flex items-center justify-center">
-          <img src="/logo.PNG" alt="Logo" className="h-26 w-auto mr-4" />
+          <img src="/img/logo.PNG" alt="Logo" className="h-26 w-auto mr-4" />
           <h1 className="text-5xl md:text-8xl font-normal text-blue-800 tracking-wide font-chalk transform -rotate-1">Doodle Noodle</h1>
         </div>
         <p className="text-center text-blue-700 mt-2 font-riscada text-3xl transform rotate-1">For Artists, By An Artist</p>
@@ -14,12 +14,12 @@ export default function ScenePage() {
 
         <div className="relative">
             <img 
-              src="/text-shadow.PNG" 
+              src="/img/text-shadow.PNG" 
               alt="Shadow" 
               className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 translate-x-5 -translate-y-3.5 scale-107"
             />
             <img 
-              src="/text-bg.PNG" 
+              src="/img/text-bg.PNG" 
               alt="background" 
               className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 -translate-y-9 rotate-3 scale-107"
             />
@@ -32,12 +32,12 @@ export default function ScenePage() {
             <div className="flex items-center mb-6 relative z-10">
               <a href="/" className="transition-all rotate-4 translate-x-4 -translate-y-6 group" aria-label="Back">
                 <img 
-                  src="/back.PNG" 
+                  src="/img/back.PNG" 
                   alt="Back" 
                   className="w-8 h-8 transition-opacity duration-200 group-hover:opacity-0"
                 />
                 <img 
-                  src="/back-hover.PNG" 
+                  src="/img/back-hover.PNG" 
                   alt="Back Hover" 
                   className="w-8 h-8 absolute top-0 left-0 duration-200 opacity-0 group-hover:opacity-100"
                   style={{ pointerEvents: 'none' }}
@@ -94,12 +94,12 @@ export default function ScenePage() {
             <div className="mt-8 text-center relative z-10 translate-x-1">
               <button className="group relative hover:scale-105 transition-all duration-300 rotate-1 hover:rotate-0 bg-transparent focus:outline-none -translate-y-7" aria-label="Generate Prompt & Mood Board">
                 <img 
-                  src="/generate.PNG" 
+                  src="/img/generate.PNG" 
                   alt="Generate Prompt & Mood Board" 
                   className="w-48 h-auto scale-120 transition-opacity duration-200 group-hover:opacity-0"
                 />
                 <img 
-                  src="/generate-hover.PNG" 
+                  src="/img/generate-hover.PNG" 
                   alt="Generate Prompt & Mood Board Hover" 
                   className="absolute top-0 left-0 duration-200 opacity-0 group-hover:opacity-100 scale-120"
                   style={{ pointerEvents: 'none' }}
