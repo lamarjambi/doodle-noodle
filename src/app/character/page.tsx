@@ -6,14 +6,10 @@ export default function CharacterPage() {
   const genreCorpora: Record<string, string> = {
     Fantasy: `A wizard with a silver staff casts spells in a misty forest. A dragon sleeps beneath the mountain. Elves whisper secrets in the ancient trees. A magical sword glows with runes. A brave knight rides into the unknown.`,
     Cyberpunk: `Neon lights flicker in the rain-soaked city. Hackers type furiously in dark rooms. Augmented eyes scan the crowd. A rogue AI plots in the shadows. Chrome limbs glint under streetlights.`,
-    Noir: `A detective in a trench coat lights a cigarette under a flickering streetlamp. Shadows stretch across the alley. A mysterious femme fatale enters the office. Rain taps on the window. Secrets are hidden in every glance.`,
-    Steampunk: `Gears whir and steam hisses from brass machines. Airships float above the city. Inventors tinker in cluttered workshops. Goggles rest on every brow. Clockwork birds sing in the morning fog.`,
     Horror: `A chill wind howls through the abandoned house. Shadows move where they shouldn't. Eyes glint in the darkness. A scream echoes in the night. The candle flickers, barely holding back the gloom.`,
-    Romance: `Two souls meet under a starlit sky. A gentle touch sparks a thousand feelings. Letters are exchanged in secret. Hearts race in the quiet moments. Love blooms in unexpected places.`,
+    // Romance: `Two souls meet under a starlit sky. A gentle touch sparks a thousand feelings. Letters are exchanged in secret. Hearts race in the quiet moments. Love blooms in unexpected places.`,
     Adventure: `A map flutters in the explorer's hand. The jungle teems with unknown sounds. A treasure chest waits beneath the waves. Boots crunch on ancient ruins. The horizon calls to the brave.`,
-    'Slice of Life': `A cat naps in a sunbeam. Friends laugh over coffee. Rain patters on the window as music plays softly. A bike ride through the park. Quiet moments make the day special.`,
     'Post-Apocalyptic': `Ruins stretch as far as the eye can see. Survivors scavenge for supplies. Hope glimmers in the darkness. A radio crackles with static. The world is silent, but not empty.`,
-    Historical: `A carriage rattles down a cobblestone street. Quills scratch on parchment. Lanterns glow in the evening. A duel is fought at dawn. History is written in every step.`,
   };
 
   const toneCorpora: Record<string, string> = {
@@ -21,12 +17,7 @@ export default function CharacterPage() {
     Creepy: `Footsteps echo in the empty hallway. Dolls stare with glassy eyes. The air is thick with secrets. Whispers come from the walls.`,
     Dramatic: `Thunder cracks as the hero falls to their knees. Tears mix with rain. Every word is heavy with meaning. The spotlight finds the truth.`,
     Peaceful: `A gentle breeze stirs the grass. Sunlight warms closed eyes. Birds sing in the distance. Everything is calm and still.`,
-    Energetic: `Feet pound the pavement in a wild race. Music blares from open windows. Laughter and shouts fill the air. The world is alive with motion.`,
-    Mysterious: `A locked door waits at the end of the hall. Shadows flicker in candlelight. A riddle is carved into stone. Eyes watch from the darkness.`,
-    'Cute & Cozy': `Blankets pile high on a rainy day. Hot cocoa steams in a favorite mug. A kitten purrs on a soft pillow. The world feels safe and small.`,
-    'Epic & Heroic': `Banners wave above the battlefield. A hero stands atop a mountain. The crowd roars in triumph. Legends are born in fire and steel.`,
-    Melancholic: `Raindrops trace paths down the window. A single flower wilts in a forgotten vase. Memories linger in the quiet. The world feels distant and blue.`,
-    Playful: `A ball bounces down the street. Friends chase each other in the sun. Jokes fly faster than the wind. Every moment is a new game.`,
+    Mysterious: `A locked door waits at the end of the hall. Shadows flicker in candlelight. A riddle is carved into stone. Eyes watch from the darkness.`
   };
 
   // Default corpus if nothing is selected
@@ -123,12 +114,12 @@ export default function CharacterPage() {
             <img 
               src="/img/text-shadow.PNG" 
               alt="Shadow" 
-              className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 translate-x-5 -translate-y-3.5 scale-110"
+              className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 translate-x-4.5 translate-y-7.5 scale-129"
             />
             <img 
               src="/img/text-bg.PNG" 
               alt="background" 
-              className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 -translate-y-9 rotate-3 scale-110"
+              className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 translate-y-2 rotate-3 scale-129"
             />
             <div className="p-8 transform -rotate-1 relative z-10">
             <div className="absolute inset-0 opacity-20 pointer-events-none">
@@ -157,14 +148,9 @@ export default function CharacterPage() {
                   <option>Choose a genre...</option>
                   <option>Fantasy</option>
                   <option>Cyberpunk</option>
-                  <option>Noir</option>
-                  <option>Steampunk</option>
                   <option>Horror</option>
-                  <option>Romance</option>
                   <option>Adventure</option>
-                  <option>Slice of Life</option>
                   <option>Post-Apocalyptic</option>
-                  <option>Historical</option>
                 </select>
               </div>
               <div>
@@ -175,16 +161,11 @@ export default function CharacterPage() {
                   <option>Creepy</option>
                   <option>Dramatic</option>
                   <option>Peaceful</option>
-                  <option>Energetic</option>
                   <option>Mysterious</option>
-                  <option>Cute & Cozy</option>
-                  <option>Epic & Heroic</option>
-                  <option>Melancholic</option>
-                  <option>Playful</option>
                 </select>
               </div>
               <div>
-                <label className="block text-blue-800 font-medium mb-3 text-2xl font-riscada transform -translate-y-3 translate-x-2 rotate-1">Emotion</label>
+                <label className="block text-blue-800 font-medium mb-3 text-2xl font-riscada transform -translate-y-3 translate-x-2 rotate-1">Keywords <span className="text-lg font-normal text-blue-600">(Optional)</span></label>
                 <input type="text" value={emotion} onChange={e => setEmotion(e.target.value)} placeholder="joy, melancholy, excitement, wonder..." className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all placeholder-blue-500 transform -translate-y-7 translate-x-1 -rotate-1" />
               </div>
               <div>
@@ -192,12 +173,8 @@ export default function CharacterPage() {
                 <input type="text" value={palette} onChange={e => setPalette(e.target.value)} placeholder="warm pastels, neon, monochrome, earth tones..." className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all placeholder-blue-500 transform -translate-y-2 rotate-4" />
               </div>
             </div>
-            <div className="mt-6 relative z-10">
-              <label className="block text-blue-800 font-medium mb-3 text-2xl font-riscada transform -translate-y-3 rotate-1">Keywords <span className="text-lg font-normal text-blue-600">(Optional)</span></label>
-              <input type="text" value={keywords} onChange={e => setKeywords(e.target.value)} placeholder="magic, forest, glowing eyes, ancient ruins, flowing cape..." className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all placeholder-blue-500 transform -translate-y-4 -translate-x-1 rotate-1" />
-            </div>
             <div className="mt-8 text-center relative z-10 translate-x-1">
-              <button onClick={handleGenerate} className="group relative hover:scale-105 transition-all duration-300 rotate-1 hover:rotate-0 bg-transparent focus:outline-none -translate-y-7" aria-label="Generate Prompt & Mood Board">
+              <button onClick={handleGenerate} className="group relative hover:scale-105 transition-all duration-300 rotate-1 hover:rotate-0 bg-transparent focus:outline-none" aria-label="Generate Prompt & Mood Board">
                 <img 
                   src="/img/generate.PNG" 
                   alt="Generate Prompt & Mood Board" 
