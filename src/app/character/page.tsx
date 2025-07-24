@@ -4,8 +4,6 @@ import React, { useState, useEffect } from 'react';
 export default function CharacterPage() {
   // Remove hardcoded corpora
 
-  // Default corpus if nothing is selected
-  const defaultCorpus = `A quirky character with glowing eyes and a mysterious past. Their flowing cape catches the wind as they leap across rooftops. A gentle smile hides a world of secrets. Magic shimmers at their fingertips, and laughter follows wherever they go. Shadows linger, but hope is never far behind.`;
 
   // Markov chain (trigram) implementation
   function buildMarkovChain(text: string): { chain: Record<string, string[]>, starts: string[] } {
@@ -166,7 +164,9 @@ export default function CharacterPage() {
       {/* Header */}
       <header className="relative z-10 p-6 ml-20">
         <div className="flex items-center justify-center">
-          <img src="/img/logo.PNG" alt="Logo" className="h-26 w-auto mr-4" />
+          <a href="/">
+            <img src="/img/logo.PNG" alt="Logo" className="h-26 w-auto mr-4" />
+          </a>
           <h1 className="text-5xl md:text-8xl font-normal text-blue-800 tracking-wide font-silly transform -rotate-1">
             Doodle Noodle
           </h1>
