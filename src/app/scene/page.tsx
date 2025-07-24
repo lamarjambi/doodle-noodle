@@ -6,7 +6,7 @@ export default function ScenePage() {
       <header className="relative z-10 p-6 ml-20">
         <div className="flex items-center justify-center">
           <img src="/img/logo.PNG" alt="Logo" className="h-26 w-auto mr-4" />
-          <h1 className="text-5xl md:text-8xl font-normal text-blue-800 tracking-wide font-chalk transform -rotate-1">Doodle Noodle</h1>
+          <h1 className="text-5xl md:text-8xl font-normal text-blue-800 tracking-wide font-silly transform -rotate-1">Doodle Noodle</h1>
         </div>
         <p className="text-center text-blue-700 mt-2 font-riscada text-3xl transform rotate-1">For Artists, By An Artist</p>
       </header>

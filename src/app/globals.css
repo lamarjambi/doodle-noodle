@@ -16,10 +16,18 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Silly Goose';
+  src: url('/fonts/SillyGoose.ttf') format('truetype');
+  font-weight: 400; /* Specify exact weight */
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --font-riscada: 'Chalk Drawings', cursive, sans-serif;
+  --font-chalk: 'Chalk Drawings', cursive, sans-serif;
 }
 
 @theme {
@@ -43,7 +51,6 @@ body {
   font-family: 'Chalk Drawings', cursive, sans-serif;
 }
 
-/* Updated backup with specific weight */
 .font-chalk {
   font-family: 'Chalk Drawings', cursive, sans-serif !important;
   font-weight: 400 !important; /* Force normal weight */
@@ -52,4 +59,9 @@ body {
 .font-riscada {
   font-family: 'Riscada Doodle', cursive, sans-serif !important;
   font-weight: 400 !important; /* Force normal weight */
+}
+
+.font-silly {
+  font-family: 'Silly Goose', cursive, sans-serif !important;
+  font-weight: 400 !important; 
 }
