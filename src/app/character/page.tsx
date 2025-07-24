@@ -71,12 +71,46 @@ export default function CharacterPage() {
     return trimmed;
   }
 
+  // Helper: Get a random sentence from a corpus string
+  function getRandomSentence(corpus: string): string {
+    if (!corpus) return '';
+    // Split on period, exclamation, or question mark followed by space or end of string
+    const sentences = corpus.match(/[^.!?]*[.!?]/g)?.map(s => s.trim()).filter(Boolean) || [];
+    if (sentences.length === 0) return '';
+    return sentences[Math.floor(Math.random() * sentences.length)];
+  }
+
   const [prompt, setPrompt] = useState('');
   const [genre, setGenre] = useState('');
   const [tone, setTone] = useState('');
   const [emotion, setEmotion] = useState('');
   const [palette, setPalette] = useState('');
   const [keywords, setKeywords] = useState('');
+
+  // Typewriter animation state
+  const [displayedPrompt, setDisplayedPrompt] = useState('');
+  const [isTyping, setIsTyping] = useState(false);
+
+  // Typewriter effect: animate displayedPrompt when prompt changes
+  useEffect(() => {
+    if (!prompt) {
+      setDisplayedPrompt('');
+      setIsTyping(false);
+      return;
+    }
+    setDisplayedPrompt('');
+    setIsTyping(true);
+    let i = 0;
+    const interval = setInterval(() => {
+      setDisplayedPrompt(prompt.slice(0, i + 1));
+      i++;
+      if (i >= prompt.length) {
+        clearInterval(interval);
+        setIsTyping(false);
+      }
+    }, 18); // Adjust speed as desired
+    return () => clearInterval(interval);
+  }, [prompt]);
 
   // New: State for loaded corpora
   const [genreCorpus, setGenreCorpus] = useState('');
@@ -113,17 +147,13 @@ export default function CharacterPage() {
   }, [tone]);
 
   const handleGenerate = () => {
-    let userCorpus = '';
-    if (genreCorpus) userCorpus += genreCorpus + '\n';
-    if (toneCorpus) userCorpus += toneCorpus + '\n';
-    if (!userCorpus) userCorpus = defaultCorpus;
-    if (emotion) userCorpus += ` ${emotion}`;
-    if (palette) userCorpus += ` ${palette}`;
-    if (keywords) userCorpus += ` ${keywords}`;
-    const { chain, starts } = buildMarkovChain(userCorpus);
-    let markovRaw = generateMarkovText(chain, starts, 36);
-    let markovPrompt = extractValidSentences(markovRaw, 2);
-    setPrompt(markovPrompt);
+    let genreSentence = getRandomSentence(genreCorpus);
+    let toneSentence = getRandomSentence(toneCorpus);
+    let promptParts = [];
+    if (genreSentence) promptParts.push(genreSentence);
+    if (toneSentence) promptParts.push(toneSentence);
+    const combinedPrompt = promptParts.join(' ');
+    setPrompt(combinedPrompt);
   };
 
   return (
@@ -211,7 +241,7 @@ export default function CharacterPage() {
               </div>
             </div>
             <div className="mt-8 text-center relative z-10 translate-x-1">
-              <button onClick={handleGenerate} className="group relative hover:scale-105 transition-all duration-300 rotate-1 hover:rotate-0 bg-transparent -translate-x-23 focus:outline-none" aria-label="Generate Prompt & Mood Board">
+              <button onClick={handleGenerate} className="group relative hover:scale-105 transition-all duration-300 rotate-1 hover:rotate-0 bg-transparent -translate-x-25 focus:outline-none" aria-label="Generate Prompt & Mood Board">
                 <img 
                   src="/img/generate.PNG" 
                   alt="Generate Prompt & Mood Board" 
@@ -229,9 +259,10 @@ export default function CharacterPage() {
         </div>
         {/* Right: Prompt always on the right side of the screen */}
         <div className="w-full md:w-[28rem] flex-shrink-0 flex items-start justify-center md:justify-end">
-          {prompt && (
-            <div className="mt-8 md:mt-0 p-6 bg-blue-50/80 rounded-lg shadow-lg text-blue-800 font-riscada text-2xl border-2 border-blue-200 max-w-2xl w-full relative z-10">
-              {prompt}
+          {(prompt || displayedPrompt) && (
+            <div className="mt-8 md:mt-0 p-6 bg text-black-800 font-riscada text-5xl max-w-2xl w-full relative z-10 min-h-[6rem]">
+              <span>{displayedPrompt}</span>
+              <span className={isTyping ? 'animate-pulse' : ''} style={{fontWeight: 'bold'}}>{isTyping ? '|' : ''}</span>
             </div>
           )}
         </div>
