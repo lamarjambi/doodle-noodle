@@ -176,7 +176,7 @@ export default function CharacterPage() {
 
   return (
     <div 
-      className="min-h-screen bg-cover bg-center bg-no-repeat"
+      className="min-h-screen bg-cover bg-center bg-repeat"
       style={{
         backgroundImage: "url('/img/notebook-bg.PNG')"
       }}

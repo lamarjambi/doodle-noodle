@@ -56,13 +56,14 @@ export async function GET(req: NextRequest) {
   const tone = searchParams.get('tone') || '';
   const keywords = searchParams.get('keywords') || '';
   const query = [genre, tone, keywords].filter(Boolean).join(' ');
+  const artQuery = (query ? query + ' art' : 'art');
   if (!query) {
     return NextResponse.json({ images: [] });
   }
   const [unsplash, pexels, pixabay] = await Promise.all([
-    fetchUnsplash(query),
-    fetchPexels(query),
-    fetchPixabay(query),
+    fetchUnsplash(artQuery),
+    fetchPexels(artQuery),
+    fetchPixabay(artQuery),
   ]);
   // Shuffle and merge results
   const all = [...unsplash, ...pexels, ...pixabay]
