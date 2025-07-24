@@ -145,24 +145,25 @@ export default function CharacterPage() {
           For Artists, By An Artist
         </p>
       </header>
-      <main className="relative z-10 max-w-4xl mx-auto px-6 pb-20 ml-20">
-        <div className="relative">
-            <img 
-              src="/img/text-shadow.PNG" 
-              alt="Shadow" 
-              className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 translate-x-4.5 translate-y-7.5 scale-129"
-            />
-            <img 
-              src="/img/text-bg.PNG" 
-              alt="background" 
-              className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 translate-y-2 rotate-3 scale-129"
-            />
-            <div className="p-8 transform -rotate-1 relative z-10">
+      <main className="relative z-10 w-full max-w-7xl mx-auto px-6 pb-20 flex flex-col md:flex-row gap-8">
+        {/* Left: Notebook area with background and controls */}
+        <div className="relative flex-1 min-w-0">
+          <img 
+            src="/img/text-shadow.PNG" 
+            alt="Shadow" 
+            className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 -translate-x-18.5 translate-y-7.5 scale-129"
+          />
+          <img 
+            src="/img/text-bg.PNG" 
+            alt="background" 
+            className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 -translate-x-23 translate-y-2 rotate-3 scale-129"
+          />
+          <div className="p-8 transform -rotate-1 relative z-10">
             <div className="absolute inset-0 opacity-20 pointer-events-none">
               {[...Array(15)].map((_, i) => (<div key={i} className="border-b border-blue-200 h-8"></div>))}
             </div>
             <div className="flex items-center mb-6 relative z-10">
-              <a href="/" className="transition-all rotate-4 translate-x-4 -translate-y-6 group" aria-label="Back">
+              <a href="/" className="transition-all rotate-4 -translate-x-30 -translate-y-6 group" aria-label="Back">
                 <img 
                   src="/img/back.PNG" 
                   alt="Back" 
@@ -175,12 +176,12 @@ export default function CharacterPage() {
                   style={{ pointerEvents: 'none' }}
                 />
               </a>
-              <h2 className="text-3xl font-medium text-blue-800 rotate-3 font-riscada translate-x-7 -translate-y-4">Character Design Details :3</h2>
+              <h2 className="text-3xl font-medium text-blue-800 rotate-3 font-riscada -translate-x-28 -translate-y-4">Character Design Details :3</h2>
             </div>
             <div className="grid md:grid-cols-2 gap-6 relative z-10">
               <div>
-                <label className="block text-blue-800 font-medium mb-3 text-2xl font-riscada transform translate-x-4 -translate-y-3 rotate-4">Genre</label>
-                <select value={genre} onChange={e => setGenre(e.target.value)} className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada rotate-4 text-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all transform -translate-y-4 translate-x-3 rotate-1">
+                <label className="block text-blue-800 font-medium mb-3 text-2xl font-riscada transform -translate-x-21 -translate-y-3 rotate-4">Genre</label>
+                <select value={genre} onChange={e => setGenre(e.target.value)} className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada rotate-4 text-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all transform -translate-y-4 -translate-x-22 rotate-1">
                   <option>Choose a genre...</option>
                   <option>Fantasy</option>
                   <option>Cyberpunk</option>
@@ -190,8 +191,8 @@ export default function CharacterPage() {
                 </select>
               </div>
               <div>
-                <label className="block text-blue-800 font-medium mb-3 text-2xl font-riscada transform -rotate-1 translate-y-1">Tone</label>
-                <select value={tone} onChange={e => setTone(e.target.value)} className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all transform -rotate-1">
+                <label className="block text-blue-800 font-medium mb-3 text-2xl font-riscada transform -rotate-1 -translate-x-22 translate-y-1">Tone</label>
+                <select value={tone} onChange={e => setTone(e.target.value)} className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all transform -rotate-1 -translate-x-21">
                   <option>Pick a tone...</option>
                   <option>Whimsical</option>
                   <option>Creepy</option>
@@ -201,16 +202,16 @@ export default function CharacterPage() {
                 </select>
               </div>
               <div>
-                <label className="block text-blue-800 font-medium mb-3 text-2xl font-riscada transform -translate-y-3 translate-x-2 rotate-1">Keywords <span className="text-lg font-normal text-blue-600">(Optional)</span></label>
-                <input type="text" value={emotion} onChange={e => setEmotion(e.target.value)} placeholder="joy, melancholy, excitement, wonder..." className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all placeholder-blue-500 transform -translate-y-7 translate-x-1 -rotate-1" />
+                <label className="block text-blue-800 font-medium mb-3 text-2xl font-riscada transform -translate-y-3 -translate-x-22 rotate-1">Keywords <span className="text-lg font-normal text-blue-600">(Optional)</span></label>
+                <input type="text" value={emotion} onChange={e => setEmotion(e.target.value)} placeholder="joy, melancholy, excitement, wonder..." className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all placeholder-blue-500 transform -translate-y-7 -translate-x-22.5 -rotate-1" />
               </div>
               <div>
-                <label className="block text-blue-800 font-medium mb-3 text-2xl font-riscada transform rotate-3 translate-x-1">Color Palette <span className="text-lg font-normal text-blue-600">(Optional)</span></label>
-                <input type="text" value={palette} onChange={e => setPalette(e.target.value)} placeholder="warm pastels, neon, monochrome, earth tones..." className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all placeholder-blue-500 transform -translate-y-2 rotate-4" />
+                <label className="block text-blue-800 font-medium mb-3 text-2xl font-riscada transform rotate-3 -translate-x-22">Color Palette <span className="text-lg font-normal text-blue-600">(Optional)</span></label>
+                <input type="text" value={palette} onChange={e => setPalette(e.target.value)} placeholder="warm pastels, neon, monochrome, earth tones..." className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all placeholder-blue-500 transform -translate-y-2 -translate-x-22.5 rotate-4" />
               </div>
             </div>
             <div className="mt-8 text-center relative z-10 translate-x-1">
-              <button onClick={handleGenerate} className="group relative hover:scale-105 transition-all duration-300 rotate-1 hover:rotate-0 bg-transparent focus:outline-none" aria-label="Generate Prompt & Mood Board">
+              <button onClick={handleGenerate} className="group relative hover:scale-105 transition-all duration-300 rotate-1 hover:rotate-0 bg-transparent -translate-x-23 focus:outline-none" aria-label="Generate Prompt & Mood Board">
                 <img 
                   src="/img/generate.PNG" 
                   alt="Generate Prompt & Mood Board" 
@@ -224,12 +225,15 @@ export default function CharacterPage() {
                 />
               </button>
             </div>
-            {prompt && (
-              <div className="mt-8 p-6 bg-blue-50/80 rounded-lg shadow-lg text-blue-800 font-riscada text-2xl border-2 border-blue-200 max-w-2xl mx-auto">
-                {prompt}
-              </div>
-            )}
           </div>
+        </div>
+        {/* Right: Prompt always on the right side of the screen */}
+        <div className="w-full md:w-[28rem] flex-shrink-0 flex items-start justify-center md:justify-end">
+          {prompt && (
+            <div className="mt-8 md:mt-0 p-6 bg-blue-50/80 rounded-lg shadow-lg text-blue-800 font-riscada text-2xl border-2 border-blue-200 max-w-2xl w-full relative z-10">
+              {prompt}
+            </div>
+          )}
         </div>
       </main>
     </div>
