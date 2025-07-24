@@ -59,8 +59,8 @@ export default function CharacterPage() {
             </div>
             <div className="grid md:grid-cols-2 gap-6 relative z-10">
               <div>
-                <label className="block text-blue-800 font-medium mb-3 text-xl font-riscada transform -translate-y-3 translate-x-3 rotate-5">Genre</label>
-                <select className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada -translate-y-5 rotate-4 text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all transform rotate-1">
+                <label className="block text-blue-800 font-medium mb-3 text-2xl font-riscada transform translate-x-4 -translate-y-3 rotate-4">Genre</label>
+                <select className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada rotate-4 text-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all transform -translate-y-4 translate-x-3 rotate-1">
                   <option>Choose a genre...</option>
                   <option>Fantasy</option>
                   <option>Cyberpunk</option>
@@ -75,8 +75,8 @@ export default function CharacterPage() {
                 </select>
               </div>
               <div>
-                <label className="block text-blue-800 font-medium mb-3 text-xl font-riscada transform -rotate-1 -translate-y-1">Tone</label>
-                <select className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all transform -translate-y-2 -rotate-1">
+                <label className="block text-blue-800 font-medium mb-3 text-2xl font-riscada transform -rotate-1 translate-y-1">Tone</label>
+                <select className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all transform -rotate-1">
                   <option>Pick a tone...</option>
                   <option>Whimsical</option>
                   <option>Creepy</option>
@@ -91,20 +91,20 @@ export default function CharacterPage() {
                 </select>
               </div>
               <div>
-                <label className="block text-blue-800 font-medium mb-3 text-xl font-riscada transform -rotate-1 translate-x-1 -translate-y-6">Emotion</label>
-                <input type="text" placeholder="joy, melancholy, excitement, wonder..." className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800  font-riscada text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all placeholder-blue-500 transform -translate-y-7 -rotate-1" />
+                <label className="block text-blue-800 font-medium mb-3 text-2xl font-riscada transform -translate-y-3 translate-x-2 rotate-1">Emotion</label>
+                <input type="text" placeholder="joy, melancholy, excitement, wonder..." className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all placeholder-blue-500 transform -translate-y-7 translate-x-1 -rotate-1" />
               </div>
               <div>
-                <label className="block text-blue-800 font-medium mb-3 text-xl font-riscada transform translate-x-1 -translate-y-1 rotate-4">Color Palette <span className="text-base font-normal text-blue-600">(Optional)</span></label>
-                <input type="text" placeholder="warm pastels, neon, monochrome, earth tones..." className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all placeholder-blue-500 transform -translate-y-2 -translate-x-1 rotate-4" />
+                <label className="block text-blue-800 font-medium mb-3 text-2xl font-riscada transform rotate-3 translate-x-1">Color Palette <span className="text-lg font-normal text-blue-600">(Optional)</span></label>
+                <input type="text" placeholder="warm pastels, neon, monochrome, earth tones..." className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all placeholder-blue-500 transform -translate-y-2 rotate-4" />
               </div>
             </div>
             <div className="mt-6 relative z-10">
-              <label className="block text-blue-800 font-medium mb-3 text-xl font-riscada transform rotate-1 -translate-y-3 translate-x-1">Keywords <span className="text-base font-normal text-blue-600">(Optional)</span></label>
-              <input type="text" placeholder="magic, forest, glowing eyes, ancient ruins, flowing cape..." className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all placeholder-blue-500 transform -translate-y-4 -translate-x-1 rotate-1" />
+              <label className="block text-blue-800 font-medium mb-3 text-2xl font-riscada transform -translate-y-3 rotate-1">Keywords <span className="text-lg font-normal text-blue-600">(Optional)</span></label>
+              <input type="text" placeholder="magic, forest, glowing eyes, ancient ruins, flowing cape..." className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all placeholder-blue-500 transform -translate-y-4 -translate-x-1 rotate-1" />
             </div>
             <div className="mt-8 text-center relative z-10 translate-x-1">
-              <button className="group relative hover:scale-105 transition-all duration-300 rotate-1 hover:rotate-0 bg-transparent focus:outline-none -translate-y-4" aria-label="Generate Prompt & Mood Board">
+              <button className="group relative hover:scale-105 transition-all duration-300 rotate-1 hover:rotate-0 bg-transparent focus:outline-none -translate-y-7" aria-label="Generate Prompt & Mood Board">
                 <img 
                   src="/generate.PNG" 
                   alt="Generate Prompt & Mood Board" 
