@@ -144,6 +144,25 @@ export default function CharacterPage() {
       .finally(() => setLoadingTone(false));
   }, [tone]);
 
+  // --- Inspiration Images State ---
+  const [inspoImages, setInspoImages] = useState<any[]>([]);
+  const [loadingInspo, setLoadingInspo] = useState(false);
+  const [inspoError, setInspoError] = useState('');
+  const [showInspo, setShowInspo] = useState(false);
+
+  // Fetch inspiration images after prompt is generated
+  useEffect(() => {
+    if (!showInspo) return;
+    setLoadingInspo(true);
+    setInspoError('');
+    fetch(`/api/inspo-images?genre=${encodeURIComponent(genre)}&tone=${encodeURIComponent(tone)}&keywords=${encodeURIComponent([emotion, palette, keywords].filter(Boolean).join(' '))}`)
+      .then(res => res.ok ? res.json() : Promise.reject('Failed to fetch'))
+      .then(data => setInspoImages(data.images || []))
+      .catch(() => setInspoError('Could not load inspiration images.'))
+      .finally(() => setLoadingInspo(false));
+  }, [showInspo, genre, tone, emotion, palette, keywords]);
+
+  // Modified handleGenerate to show inspiration section
   const handleGenerate = () => {
     let genreSentence = getRandomSentence(genreCorpus);
     let toneSentence = getRandomSentence(toneCorpus);
@@ -152,6 +171,7 @@ export default function CharacterPage() {
     if (toneSentence) promptParts.push(toneSentence);
     const combinedPrompt = promptParts.join(' ');
     setPrompt(combinedPrompt);
+    setShowInspo(true);
   };
 
   return (
@@ -267,6 +287,42 @@ export default function CharacterPage() {
           )}
         </div>
       </main>
+      {/* Pinterest-style Inspiration Board */}
+      {showInspo && (
+        <section className="max-w-6xl mx-auto mt-10 mb-20 p-6 bg-white/80 rounded-xl shadow-lg">
+          <h3 className="text-3xl font-riscada text-blue-800 mb-6">Inspiration Board</h3>
+          {loadingInspo && <p className="text-blue-700 font-riscada mb-4">Loading images...</p>}
+          {inspoError && <p className="text-red-600 font-riscada mb-4">{inspoError}</p>}
+          {!loadingInspo && !inspoError && (
+            <div className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
+              {inspoImages.length === 0 && (
+                <p className="text-blue-700 font-riscada">No inspiration images found for your search.</p>
+              )}
+              {inspoImages.map((img, idx) => (
+                <a
+                  key={idx}
+                  href={img.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block mb-4 break-inside-avoid rounded-lg overflow-hidden shadow hover:shadow-lg transition-all bg-blue-50 border border-blue-200"
+                  title={img.alt}
+                >
+                  <img
+                    src={img.src}
+                    alt={img.alt || 'Inspiration'}
+                    className="w-full object-cover mb-2 rounded-t-lg"
+                    style={{ maxHeight: 320, minHeight: 120 }}
+                  />
+                  <div className="px-3 pb-2 text-blue-800 text-base font-riscada">
+                    {img.alt?.slice(0, 60) || 'Untitled'}
+                    <span className="block text-xs text-blue-400 mt-1">{img.source}</span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          )}
+        </section>
+      )}
     </div>
   );
 } 

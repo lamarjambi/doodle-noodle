@@ -62,17 +62,14 @@ export default function CharacterPage() {
     trimmed = trimmed.charAt(0).toUpperCase() + trimmed.slice(1);
     // Remove trailing conjunctions or incomplete words
     trimmed = trimmed.replace(/( and| or| but|,|;|:)\s*$/i, '');
-    // Ensure it ends with a period, exclamation, or question mark
     if (!/[.!?]$/.test(trimmed)) {
       trimmed += '.';
     }
     return trimmed;
   }
 
-  // Helper: Get a random sentence from a corpus string
   function getRandomSentence(corpus: string): string {
     if (!corpus) return '';
-    // Split on period, exclamation, or question mark followed by space or end of string
     const sentences = corpus.match(/[^.!?]*[.!?]/g)?.map(s => s.trim()).filter(Boolean) || [];
     if (sentences.length === 0) return '';
     return sentences[Math.floor(Math.random() * sentences.length)];
@@ -84,12 +81,10 @@ export default function CharacterPage() {
   const [emotion, setEmotion] = useState('');
   const [palette, setPalette] = useState('');
   const [keywords, setKeywords] = useState('');
-
-  // Typewriter animation state
   const [displayedPrompt, setDisplayedPrompt] = useState('');
   const [isTyping, setIsTyping] = useState(false);
 
-  // Typewriter effect: animate displayedPrompt when prompt changes
+  // typewriter
   useEffect(() => {
     if (!prompt) {
       setDisplayedPrompt('');
@@ -106,17 +101,15 @@ export default function CharacterPage() {
         clearInterval(interval);
         setIsTyping(false);
       }
-    }, 18); // Adjust speed as desired
+    }, 18); 
     return () => clearInterval(interval);
   }, [prompt]);
 
-  // New: State for loaded corpora
   const [genreCorpus, setGenreCorpus] = useState('');
   const [toneCorpus, setToneCorpus] = useState('');
   const [loadingGenre, setLoadingGenre] = useState(false);
   const [loadingTone, setLoadingTone] = useState(false);
 
-  // Fetch genre corpus when genre changes
   useEffect(() => {
     if (!genre || genre === 'Choose a genre...') {
       setGenreCorpus('');
