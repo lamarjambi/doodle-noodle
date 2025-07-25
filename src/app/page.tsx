@@ -38,12 +38,12 @@ export default function Home() {
           <img 
             src="/img/text-shadow.PNG" 
             alt="Shadow" 
-            className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 scale-180 translate-x-4.5 translate-y-26"
+            className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 scale-160 translate-x-4 translate-y-20"
           />
           <img 
             src="/img/text-bg.PNG" 
             alt="background" 
-            className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 rotate-3 scale-180 translate-y-20"
+            className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 rotate-3 scale-160 translate-y-14"
           />
           <div className="p-8 transform -rotate-1 relative z-10">
             {/* Notebook paper lines effect */}
@@ -59,7 +59,7 @@ export default function Home() {
               {/* Character Design Button */}
               <button 
                 onClick={() => handleTypeSelect('character')}
-                className="group bg-transparent rounded-xl p-0 border-none shadow-none text-center transform rotate-5 hover:rotate-0 transition-all duration-300 focus:outline-none relative overflow-hidden translate-y-6"
+                className="group bg-transparent rounded-xl p-0 border-none shadow-none text-center transform rotate-5 hover:rotate-0 transition-all duration-300 focus:outline-none relative overflow-hidden translate-x-3 translate-y-6"
                 style={{ minHeight: '220px' }}
                 aria-label="Character Design"
               >
@@ -67,7 +67,7 @@ export default function Home() {
                   <img 
                     src="/img/character.PNG" 
                     alt="Character Design" 
-                    className="transition-opacity duration-300 group-hover:opacity-0 object-contain w-full h-full"
+                    className="transition-opacity duration-300 group-hover:opacity-0 object-contain scale-90 w-full h-full"
                   />
                   <img 
                     src="/img/character-folded.PNG" 
@@ -85,7 +85,7 @@ export default function Home() {
               {/* Scene Illustration Button */}
               <button 
                 onClick={() => handleTypeSelect('scene')}
-                className="group bg-transparent rounded-xl p-0 border-none shadow-none text-center transform -rotate-4 hover:rotate-0 transition-all duration-300 focus:outline-none relative overflow-hidden translate-y-7"
+                className="group bg-transparent rounded-xl p-0 border-none shadow-none text-center transform -rotate-4 hover:rotate-0 transition-all duration-300 focus:outline-none relative overflow-hidden -translate-x-3 translate-y-7"
                 style={{ minHeight: '220px' }}
                 aria-label="Scene Illustration"
               >
@@ -93,7 +93,7 @@ export default function Home() {
                   <img 
                     src="/img/scene.PNG" 
                     alt="Scene Illustration" 
-                    className="transition-opacity duration-300 group-hover:opacity-0 object-contain w-full h-full"
+                    className="transition-opacity duration-300 group-hover:opacity-0 object-contain scale-90 w-full h-full"
                   />
                   <img 
                     src="/img/scene-folded.PNG" 
@@ -111,7 +111,7 @@ export default function Home() {
               {/* Comic Strip Button */}
               <button 
                 onClick={() => handleTypeSelect('comic')}
-                className="group bg-transparent rounded-xl p-0 border-none shadow-none text-center transform rotate-8 hover:rotate-0 transition-all duration-300 focus:outline-none relative overflow-hidden translate-y-12"
+                className="group bg-transparent rounded-xl p-0 border-none shadow-none text-center transform rotate-8 hover:rotate-0 transition-all duration-300 focus:outline-none relative overflow-hidden -translate-x-5 translate-y-14"
                 style={{ minHeight: '220px' }}
                 aria-label="Comic Strip"
               >
@@ -119,7 +119,7 @@ export default function Home() {
                   <img 
                     src="/img/comic.PNG" 
                     alt="Comic Strip" 
-                    className="transition-opacity duration-300 group-hover:opacity-0 object-contain w-full h-full"
+                    className="transition-opacity duration-300 group-hover:opacity-0 object-contain scale-90 w-full h-full"
                   />
                   <img 
                     src="/img/comic-folded.PNG" 
