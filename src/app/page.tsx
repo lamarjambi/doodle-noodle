@@ -23,7 +23,7 @@ export default function Home() {
       <header className="relative z-10 p-6 ml-20">
         <div className="flex items-center justify-center">
           <img src="/img/logo.PNG" alt="Logo" className="h-26 w-auto mr-4" />
-          <h1 className="text-5xl md:text-8xl font-normal text-blue-800 tracking-wide font-silly transform -rotate-1">
+          <h1 className="text-5xl md:text-8xl font-normal text-blue-800 tracking-wide font-silly transform -rotate-1" style={{color: "#8587ed" }}>
             Doodle Noodle
           </h1>
         </div>
@@ -160,7 +160,7 @@ export default function Home() {
           </div>
           <div className="copyright sm:text-2xl font-chalk text-center translate-y-2" style={{ color: '#e573e9' }}>
             <p>© 2025 All rights reserved to J@mbo</p>
-            <p>Made with ★ in Brooklyn, NY</p>
+            <p>Made with ★ in San Francisco, CA</p>
           </div>
         </div>
       </footer>

@@ -205,7 +205,7 @@ export default function CharacterPage() {
           <a href="/">
             <img src="/img/logo.PNG" alt="Logo" className="h-26 w-auto mr-4" />
           </a>
-          <h1 className="text-5xl md:text-8xl font-normal text-blue-800 tracking-wide font-silly transform -rotate-1">
+          <h1 className="text-5xl md:text-8xl font-normal text-blue-800 tracking-wide font-silly transform -rotate-1" style={{color: "#8587ed" }}>
             Doodle Noodle
           </h1>
         </div>
@@ -244,7 +244,7 @@ export default function CharacterPage() {
                   style={{ pointerEvents: 'none' }}
                 />
               </a>
-              <h2 className="text-3xl font-medium text-blue-800 rotate-3 font-riscada -translate-x-28 -translate-y-4">Character Design Details :3</h2>
+              <h2 className="text-3xl font-medium text-blue-800 rotate-3 font-riscada -translate-x-28 -translate-y-4" style={{color: "#8587ed" }}>Character Design Details :3</h2>
             </div>
             <div className="grid md:grid-cols-2 gap-6 relative z-10">
               <div>
