@@ -227,9 +227,6 @@ export default function CharacterPage() {
             className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 rotate-3 translate-x-2 -translate-y-2 scale-118"
           />
           <div className="p-8 transform -rotate-1 relative z-10">
-            <div className="absolute inset-0 opacity-20 pointer-events-none">
-              {[...Array(15)].map((_, i) => (<div key={i} className="border-b border-blue-200 h-8"></div>))}
-            </div>
             <div className="flex items-center mb-6 relative z-10">
               <a href="/" className="transition-all rotate-4 translate-x-2 -translate-y-6 group" aria-label="Back">
                 <img 
