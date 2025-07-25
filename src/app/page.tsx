@@ -158,7 +158,7 @@ export default function Home() {
             <img src="/img/itchio.svg" alt="itch.io" width="24" height="24" />
             </a>
           </div>
-          <div className="copyright sm:text-2xl font-chalk text-center translate-y-2" style={{ color: '#e573e9' }}>
+          <div className="copyright sm:text-2xl font-riscada text-center translate-y-2" style={{ color: '#e573e9' }}>
             <p>© 2025 All rights reserved to J@mbo</p>
             <p>Made with ★ in San Francisco, CA</p>
           </div>
