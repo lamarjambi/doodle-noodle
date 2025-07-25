@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 export default function CharacterPage() {
   // Remove hardcoded corpora
@@ -175,8 +175,23 @@ export default function CharacterPage() {
     setShowInspo(true);
   };
 
+  // Parallax background scroll effect
+  const bgRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrolled = window.scrollY;
+      if (bgRef.current) {
+        // Slower effect: use a smaller multiplier
+        bgRef.current.style.backgroundPositionY = `${-(scrolled * 0.08)}px`;
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div 
+      ref={bgRef}
       className="min-h-screen"
       style={{
         backgroundImage: "url('/img/notebook-bg.PNG')",
