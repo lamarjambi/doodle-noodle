@@ -149,6 +149,7 @@ export default function CharacterPage() {
   const [loadingInspo, setLoadingInspo] = useState(false);
   const [inspoError, setInspoError] = useState('');
   const [showInspo, setShowInspo] = useState(false);
+  const [imageAspectRatios, setImageAspectRatios] = useState<{ [key: number]: number }>({});
 
   // Fetch inspiration images after prompt is generated
   useEffect(() => {
@@ -176,9 +177,11 @@ export default function CharacterPage() {
 
   return (
     <div 
-      className="min-h-screen bg-cover bg-center bg-repeat"
+      className="min-h-screen"
       style={{
-        backgroundImage: "url('/img/notebook-bg.PNG')"
+        backgroundImage: "url('/img/notebook-bg.PNG')",
+        backgroundRepeat: 'repeat',
+        backgroundSize: 'auto'
       }}
     >
       {/* Header */}
@@ -298,35 +301,45 @@ export default function CharacterPage() {
               {inspoImages.length === 0 && (
                 <p className="text-blue-700 font-riscada">No inspiration images found for your search.</p>
               )}
-              {inspoImages.map((img, idx) => (
-                <a
-                  key={idx}
-                  href={img.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block mb-4 break-inside-avoid transition-all hover:shadow-lg"
-                  title={img.alt}
-                >
-                  <div className="relative w-full mx-auto" style={{ aspectRatio: '1/1', maxWidth: 320 }}>
-                    <img
-                      src={img.src}
-                      alt={img.alt || 'Inspiration'}
-                      className="absolute top-[8%] left-[8%] w-[84%] h-[84%] object-cover"
-                      style={{ zIndex: 1, borderRadius: 0 }}
-                    />
-                    <img
-                      src="/img/frame.PNG"
-                      alt="Frame"
-                      className="absolute top-0 left-0 w-full h-full pointer-events-none select-none"
-                      style={{ objectFit: 'contain', zIndex: 2 }}
-                    />
-                  </div>
-                  <div className="px-3 pb-2 text-blue-800 text-base font-riscada">
-                    {img.alt?.slice(0, 60) || 'Untitled'}
-                    <span className="block text-xs text-blue-400 mt-1">{img.source}</span>
-                  </div>
-                </a>
-              ))}
+              {inspoImages.map((img, idx) => {
+                const aspectRatio = imageAspectRatios[idx] || 1; // default to square
+                return (
+                  <a
+                    key={idx}
+                    href={img.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block mb-4 break-inside-avoid transition-all hover:shadow-lg"
+                    title={img.alt}
+                  >
+                    <div
+                      className="relative w-full mx-auto"
+                      style={{ aspectRatio: `${aspectRatio}`, maxWidth: 320 }}
+                    >
+                      <img
+                        src={img.src}
+                        alt={img.alt || 'Inspiration'}
+                        className="absolute top-[8%] left-[8%] w-[84%] h-[84%] object-cover"
+                        style={{ zIndex: 1, borderRadius: 0 }}
+                        onLoad={e => {
+                          const { naturalWidth, naturalHeight } = e.currentTarget;
+                          setImageAspectRatios(prev => ({ ...prev, [idx]: naturalWidth / naturalHeight }));
+                        }}
+                      />
+                      <img
+                        src="/img/frame.PNG"
+                        alt="Frame"
+                        className="absolute top-0 left-0 w-full h-full pointer-events-none select-none"
+                        style={{ objectFit: 'fill', zIndex: 2 }}
+                      />
+                    </div>
+                    <div className="px-3 pb-2 text-blue-800 text-base font-riscada">
+                      {img.alt?.slice(0, 60) || 'Untitled'}
+                      <span className="block text-xs text-blue-400 mt-1">{img.source}</span>
+                    </div>
+                  </a>
+                );
+              })}
             </div>
           )}
         </section>

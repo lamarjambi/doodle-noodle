@@ -12,10 +12,12 @@ export default function Home() {
 
   return (
     <div 
-      className="min-h-screen bg-cover bg-center bg-no-repeat"
-      style={{
-        backgroundImage: "url('/img/notebook-bg.PNG')"
-      }}
+    className="min-h-screen"
+    style={{
+      backgroundImage: "url('/img/notebook-bg.PNG')",
+      backgroundRepeat: 'repeat',
+      backgroundSize: 'auto'
+    }}
     >
       {/* Header */}
       <header className="relative z-10 p-6 ml-20">
