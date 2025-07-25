@@ -3,7 +3,11 @@ import { NextRequest, NextResponse } from 'next/server';
 async function fetchPixabay(query: string) {
   try {
     console.log('Fetching from Pixabay with query:', query);
-    const res = await fetch(`https://pixabay.com/api/?key=43239069-8c0c8c0c8c0c8c0c8c0c8c0c&q=${encodeURIComponent(query)}&image_type=photo&per_page=20&safesearch=true`);
+    
+    // Use environment variable or fallback to a demo key
+    const apiKey = process.env.PIXABAY_API_KEY || '43239069-8c0c8c0c8c0c8c0c8c0c8c0c';
+    
+    const res = await fetch(`https://pixabay.com/api/?key=${apiKey}&q=${encodeURIComponent(query)}&image_type=photo&per_page=20&safesearch=true`);
     
     if (!res.ok) {
       console.error('Pixabay API response not ok:', res.status, res.statusText);
