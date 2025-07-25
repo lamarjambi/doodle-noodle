@@ -323,7 +323,7 @@ export default function CharacterPage() {
                     href={img.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block mb-4 break-inside-avoid transition-all hover:shadow-lg"
+                    className="block mb-4 break-inside-avoid transition-all group"
                     title={img.alt}
                   >
                     <div
@@ -346,10 +346,17 @@ export default function CharacterPage() {
                         className="absolute top-0 left-0 w-full h-full pointer-events-none select-none"
                         style={{ objectFit: 'fill', zIndex: 2 }}
                       />
-                    </div>
-                    <div className="px-3 pb-2 text-blue-800 text-base font-riscada">
-                      {img.alt?.slice(0, 60) || 'Untitled'}
-                      <span className="block text-xs text-blue-400 mt-1">{img.source}</span>
+                      {/* hover overlay for details */}
+                      <div
+                        className="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10 p-4 text-center rounded-lg"
+                      >
+                        <div className="text-blue-800 font-riscada text-lg mb-2 break-words">
+                          {img.alt?.slice(0, 120) || 'Untitled'}
+                        </div>
+                        <div className="text-blue-400 text-sm font-riscada">
+                          {img.source}
+                        </div>
+                      </div>
                     </div>
                   </a>
                 );
