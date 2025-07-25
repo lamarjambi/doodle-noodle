@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
 
-export default function CharacterPage() {
+export default function ScenePage() {
 
 
   // Markov chain (trigram) implementation
@@ -240,7 +240,7 @@ export default function CharacterPage() {
                   style={{ pointerEvents: 'none' }}
                 />
               </a>
-              <h2 className="text-3xl font-medium text-blue-800 rotate-4 font-riscada translate-x-6 -translate-y-4" style={{color: "#8587ed" }}>Character Design Details :3</h2>
+              <h2 className="text-3xl font-medium text-blue-800 rotate-4 font-riscada translate-x-6 -translate-y-4" style={{color: "#8587ed" }}>Scene Illustration Details :3</h2>
             </div>
             <div className="grid md:grid-cols-2 gap-6 relative z-10">
               <div>
