@@ -89,7 +89,7 @@ export default function CharacterPage() {
   const [displayedPrompt, setDisplayedPrompt] = useState('');
   const [isTyping, setIsTyping] = useState(false);
 
-  // Typewriter effect: animate displayedPrompt when prompt changes
+  // typewriter effect
   useEffect(() => {
     if (!prompt) {
       setDisplayedPrompt('');
@@ -304,15 +304,23 @@ export default function CharacterPage() {
                   href={img.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block mb-4 break-inside-avoid rounded-lg overflow-hidden shadow hover:shadow-lg transition-all bg-blue-50 border border-blue-200"
+                  className="block mb-4 break-inside-avoid transition-all hover:shadow-lg"
                   title={img.alt}
                 >
-                  <img
-                    src={img.src}
-                    alt={img.alt || 'Inspiration'}
-                    className="w-full object-cover mb-2 rounded-t-lg"
-                    style={{ maxHeight: 320, minHeight: 120 }}
-                  />
+                  <div className="relative w-full mx-auto" style={{ aspectRatio: '1/1', maxWidth: 320 }}>
+                    <img
+                      src={img.src}
+                      alt={img.alt || 'Inspiration'}
+                      className="absolute top-[8%] left-[8%] w-[84%] h-[84%] object-cover"
+                      style={{ zIndex: 1, borderRadius: 0 }}
+                    />
+                    <img
+                      src="/img/frame.PNG"
+                      alt="Frame"
+                      className="absolute top-0 left-0 w-full h-full pointer-events-none select-none"
+                      style={{ objectFit: 'contain', zIndex: 2 }}
+                    />
+                  </div>
                   <div className="px-3 pb-2 text-blue-800 text-base font-riscada">
                     {img.alt?.slice(0, 60) || 'Untitled'}
                     <span className="block text-xs text-blue-400 mt-1">{img.source}</span>
