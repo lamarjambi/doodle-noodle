@@ -58,7 +58,7 @@ export default function Home() {
             className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 rotate-3 scale-160 translate-y-14 hidden sm:block"
           />
           <div className="p-4 sm:p-8 transform -rotate-1 relative z-10">
-            <h2 className="text-2xl sm:text-4xl font-medium text-blue-800 mb-4 sm:mb-8 text-center font-riscada relative z-10 transform rotate-4 translate-y-2 sm:translate-y-4.5 mt-8 sm:mt-0">
+            <h2 className="text-2xl sm:text-4xl font-medium text-blue-800 mb-4 sm:mb-8 text-center font-riscada relative z-10 transform rotate-4 translate-y-5 sm:translate-y-4.5 mt-8 sm:mt-0">
               What would you like to create?
             </h2>
             <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 relative z-10">

@@ -192,7 +192,7 @@ export default function CharacterPage() {
   return (
     <div 
       ref={bgRef}
-      className="min-h-screen"
+      className="min-h-screen overflow-x-hidden mobile-bg"
       style={{
         backgroundImage: "url('/img/notebook-bg.PNG')",
         backgroundRepeat: 'repeat',
@@ -200,53 +200,65 @@ export default function CharacterPage() {
       }}
     >
       {/* Header */}
-      <header className="relative z-10 p-6 ml-20">
-        <div className="flex items-center justify-center">
+      <header className="relative z-10 p-4 sm:p-6 sm:ml-10 md:ml-20">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
           <a href="/">
-            <img src="/img/logo.PNG" alt="Logo" className="h-26 w-auto mr-4" />
+            <img src="/img/logo.PNG" alt="Logo" className="h-16 sm:h-20 md:h-26 w-auto mb-2 sm:mb-0 sm:mr-4" />
           </a>
-          <h1 className="text-5xl md:text-8xl font-normal text-blue-800 tracking-wide font-silly transform -rotate-1" style={{color: "#8587ed" }}>
+          <h1 className="text-3xl sm:text-5xl md:text-8xl font-normal text-blue-800 tracking-wide font-silly transform -rotate-1" style={{color: "#8587ed" }}>
             Doodle Noodle
           </h1>
         </div>
-        <p className="text-center text-blue-700 mt-2 font-riscada text-3xl transform rotate-1">
+        <p className="text-center text-blue-700 mt-2 font-riscada text-xl sm:text-2xl md:text-3xl transform rotate-1">
           For Artists, By An Artist
         </p>
       </header>
-      <main className="relative z-10 w-full max-w-7xl mx-auto px-6 pb-20 flex flex-col md:flex-row gap-8">
+      <main className="relative z-10 w-full max-w-7xl mx-auto px-2 sm:px-6 pb-20 sm:ml-10 md:ml-20 flex flex-col md:flex-row gap-4 sm:gap-8">
 
         <div className="relative flex-1 min-w-0">
-          <img 
-            src="/img/text-shadow.PNG" 
-            alt="Shadow" 
-            className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 translate-x-6 translate-y-4 scale-118"
+          {/* Shadow Images: mobile and desktop */}
+          <img
+            src="/img/text-shadow-sm.PNG"
+            alt="Shadow"
+            className="absolute inset-0 w-2/3 sm:w-full h-auto object-contain pointer-events-none select-none z-0 scale-150 sm:scale-118 translate-x-18 translate-y-29 sm:translate-x-6 sm:translate-y-4 block sm:hidden"
           />
-          <img 
-            src="/img/text-bg.PNG" 
-            alt="background" 
-            className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 rotate-3 translate-x-2 -translate-y-2 scale-118"
+          <img
+            src="/img/text-shadow.PNG"
+            alt="Shadow"
+            className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 scale-118 translate-x-5 translate-y-4 hidden sm:block"
           />
-          <div className="p-8 transform -rotate-1 relative z-10">
-            <div className="flex items-center mb-6 relative z-10">
-              <a href="/" className="transition-all rotate-4 translate-x-2 -translate-y-6 group" aria-label="Back">
+          {/* Background Images: mobile and desktop */}
+          <img
+            src="/img/text-bg-sm.PNG"
+            alt="background"
+            className="absolute inset-0 w-2/3 sm:w-full h-auto object-contain pointer-events-none select-none z-0 rotate-3 scale-150 sm:scale-118 translate-x-15 translate-y-27 sm:translate-x-2 sm:-translate-y-2 block sm:hidden"
+          />
+          <img
+            src="/img/text-bg.PNG"
+            alt="background"
+            className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 rotate-3 scale-118 translate-x-2 -translate-y-2 hidden sm:block"
+          />
+          <div className="p-4 sm:p-8 transform -rotate-1 relative z-10">
+            <div className="flex items-center mb-4 sm:mb-6 relative z-10">
+              <a href="/" className="transition-all rotate-4 translate-x-2 -translate-y-6 group hidden sm:block" aria-label="Back">
                 <img 
                   src="/img/back.PNG" 
                   alt="Back" 
-                  className="w-8 h-8 transition-opacity duration-200 group-hover:opacity-0"
+                  className="w-6 sm:w-8 h-6 sm:h-8 transition-opacity duration-200 group-hover:opacity-0"
                 />
                 <img 
                   src="/img/back-hover.PNG" 
                   alt="Back Hover" 
-                  className="w-8 h-8 absolute top-0 left-0 duration-200 opacity-0 group-hover:opacity-100"
+                  className="w-6 sm:w-8 h-6 sm:h-8 absolute top-0 left-0 duration-200 opacity-0 group-hover:opacity-100"
                   style={{ pointerEvents: 'none' }}
                 />
               </a>
-              <h2 className="text-3xl font-medium text-blue-800 rotate-4 font-riscada translate-x-6 -translate-y-4" style={{color: "#8587ed" }}>Character Design Details :3</h2>
+              <h2 className="text-xl sm:text-3xl font-medium text-blue-800 rotate-4 font-riscada translate-x-6 sm:translate-x-6 translate-y-11 sm:-translate-y-4" style={{color: "#8587ed" }}>Character Design Details :3</h2>
             </div>
-            <div className="grid md:grid-cols-2 gap-6 relative z-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 relative z-10">
               <div>
-                <label className="block text-blue-800 font-medium mb-3 text-2xl font-riscada transform translate-x-6 rotate-4">Genre</label>
-                <select value={genre} onChange={e => setGenre(e.target.value)} className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada rotate-4 text-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all transform translate-x-5 -translate-y-2 rotate-1">
+                <label className="block text-blue-800 font-medium mb-2 sm:mb-3 text-lg sm:text-2xl font-riscada transform translate-x-5 translate-y-9 sm:translate-x-6 rotate-4">Genre</label>
+                <select value={genre} onChange={e => setGenre(e.target.value)} className="w-full max-w-xs sm:max-w-none p-3 sm:p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada rotate-4 text-lg sm:text-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all transform translate-x-3 sm:translate-x-5 translate-y-8 sm:-translate-y-2 rotate-1">
                   <option>Choose a genre...</option>
                   <option>Fantasy</option>
                   <option>Cyberpunk</option>
@@ -256,8 +268,8 @@ export default function CharacterPage() {
                 </select>
               </div>
               <div>
-                <label className="block text-blue-800 font-medium mb-3 text-2xl font-riscada transform -rotate-1 translate-x-4 translate-y-1">Tone</label>
-                <select value={tone} onChange={e => setTone(e.target.value)} className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all transform -rotate-1 translate-x-4">
+                <label className="block text-blue-800 font-medium mb-2 sm:mb-3 text-lg sm:text-2xl font-riscada transform -rotate-1 translate-x-3 sm:translate-x-4 translate-y-4">Tone</label>
+                <select value={tone} onChange={e => setTone(e.target.value)} className="w-full max-w-xs sm:max-w-none p-3 sm:p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-lg sm:text-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all transform -rotate-1 translate-y-3 translate-x-2 sm:translate-x-4">
                   <option>Pick a tone...</option>
                   <option>Whimsical</option>
                   <option>Creepy</option>
@@ -267,20 +279,20 @@ export default function CharacterPage() {
                 </select>
               </div>
               <div>
-                <label className="block text-blue-800 font-medium mb-3 text-2xl font-riscada transform -translate-y-3 translate-x-5 -rotate-2">Keywords <span className="text-lg font-normal text-blue-600">(Optional)</span></label>
-                <input type="text" value={emotion} onChange={e => setEmotion(e.target.value)} placeholder="magic, forest..." className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all placeholder-blue-500 transform -translate-y-5 translate-x-4 -rotate-2" />
+                <label className="block text-blue-800 font-medium mb-2 sm:mb-3 text-lg sm:text-2xl font-riscada transform translate-y-1 sm:-translate-y-3 translate-x-3 sm:translate-x-5 -rotate-2">Keywords <span className="text-sm sm:text-lg font-normal text-blue-600">(Optional)</span></label>
+                <input type="text" value={emotion} onChange={e => setEmotion(e.target.value)} placeholder="magic, forest..." className="w-full max-w-xs sm:max-w-none p-3 sm:p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-lg sm:text-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all placeholder-blue-500 transform -translate-y-1 sm:-translate-y-5 translate-x-1 sm:translate-x-4 -rotate-2" />
               </div>
               <div>
-                <label className="block text-blue-800 font-medium mb-3 text-2xl font-riscada transform rotate-3 translate-x-4">Color Palette <span className="text-lg font-normal text-blue-600">(Optional)</span></label>
-                <input type="text" value={palette} onChange={e => setPalette(e.target.value)} placeholder="pastels, neon, earth tones..." className="w-full p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all placeholder-blue-500 transform -translate-y-2 translate-x-3 rotate-4" />
+                <label className="block text-blue-800 font-medium mb-2 sm:mb-3 text-lg sm:text-2xl font-riscada transform rotate-3 translate-x-2 sm:translate-x-4">Color Palette <span className="text-sm sm:text-lg font-normal text-blue-600">(Optional)</span></label>
+                <input type="text" value={palette} onChange={e => setPalette(e.target.value)} placeholder="pastels, neon, earth tones..." className="w-full max-w-xs sm:max-w-none p-3 sm:p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-lg sm:text-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all placeholder-blue-500 transform -translate-y-1 sm:-translate-y-2 -translate-x-1 sm:translate-x-3 rotate-4" />
               </div>
             </div>
-            <div className="mt-8 text-center relative z-10 translate-x-1">
+            <div className="mt-6 sm:mt-8 text-center relative z-10 -translate-y-3 -translate-x-3">
               <button onClick={handleGenerate} className="group relative hover:scale-105 transition-all duration-300 rotate-1 hover:rotate-0 bg-transparent focus:outline-none" aria-label="Generate Prompt & Mood Board">
                 <img 
                   src="/img/generate.PNG" 
-                  alt="Generate Prompt & Mood Board" 
-                  className="w-48 h-auto scale-120 transition-opacity duration-200 group-hover:opacity-0"
+                  alt="Generate" 
+                  className="w-32 sm:w-48 h-auto scale-120 transition-opacity duration-200 group-hover:opacity-0"
                 />
                 <img 
                   src="/img/generate-hover.PNG" 
@@ -295,7 +307,7 @@ export default function CharacterPage() {
 
         <div className="w-full md:w-[28rem] flex-shrink-0 flex items-start justify-center md:justify-end">
           {(prompt || displayedPrompt) && (
-            <div className="mt-8 md:mt-0 p-6 bg text-black-800 font-riscada text-5xl max-w-2xl w-full relative z-10 min-h-[6rem]">
+            <div className="mt-4 sm:mt-8 md:mt-0 p-4 sm:p-6 bg text-black-800 font-riscada text-2xl sm:text-5xl max-w-2xl w-full relative z-10 min-h-[4rem] sm:min-h-[6rem]">
               <span>{displayedPrompt}</span>
               <span className={isTyping ? 'animate-pulse' : ''} style={{fontWeight: 'bold'}}>{isTyping ? '|' : ''}</span>
             </div>
@@ -303,12 +315,12 @@ export default function CharacterPage() {
         </div>
       </main>
       {showInspo && (
-        <section className="max-w-6xl mx-auto mt-10 mb-20 p-6 bg-white/80 rounded-xl shadow-lg">
-          <h3 className="text-3xl font-riscada text-blue-800 mb-6">Inspo Board :]</h3>
+        <section className="max-w-6xl mx-auto mt-6 sm:mt-10 mb-16 sm:mb-20 p-4 sm:p-6 bg-white/80 rounded-xl shadow-lg">
+          <h3 className="text-2xl sm:text-3xl font-riscada text-blue-800 mb-4 sm:mb-6">Inspo Board :]</h3>
           {loadingInspo && <p className="text-blue-700 font-riscada mb-4">Loading images...</p>}
           {inspoError && <p className="text-red-600 font-riscada mb-4">{inspoError}</p>}
           {!loadingInspo && !inspoError && (
-            <div className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
+            <div className="columns-2 md:columns-3 lg:columns-4 gap-2 sm:gap-4 space-y-2 sm:space-y-4">
               {inspoImages.length === 0 && (
                 <p className="text-blue-700 font-riscada">No inspiration images found for your search.</p>
               )}
@@ -320,7 +332,7 @@ export default function CharacterPage() {
                     href={img.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block mb-4 break-inside-avoid transition-all group"
+                    className="block mb-2 sm:mb-4 break-inside-avoid transition-all group"
                     title={img.alt}
                   >
                     <div
@@ -345,12 +357,12 @@ export default function CharacterPage() {
                       />
                       {/* hover overlay for details */}
                       <div
-                        className="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10 p-4 text-center rounded-lg"
+                        className="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10 p-2 sm:p-4 text-center rounded-lg"
                       >
-                        <div className="text-blue-800 font-riscada text-lg mb-2 break-words">
+                        <div className="text-blue-800 font-riscada text-sm sm:text-lg mb-2 break-words">
                           {img.alt?.slice(0, 120) || 'Untitled'}
                         </div>
-                        <div className="text-blue-400 text-sm font-riscada">
+                        <div className="text-blue-400 text-xs sm:text-sm font-riscada">
                           {img.source}
                         </div>
                       </div>
@@ -364,9 +376,9 @@ export default function CharacterPage() {
       )}
 
       {/* FOOTER */}
-      <footer className="footer w-full mt-40 min-h-[160px]" style={{ background: 'transparent' }}>
-        <div className="footer-content flex flex-col items-center justify-center py-16">
-          <div className="social-links flex flex-row space-x-6 mb-2">
+      <footer className="footer w-full mt-20 sm:mt-40 min-h-[120px] sm:min-h-[160px]" style={{ background: 'transparent' }}>
+        <div className="footer-content flex flex-col items-center justify-center py-8 sm:py-16">
+          <div className="social-links flex flex-wrap flex-row space-x-4 sm:space-x-6 mb-2 justify-center">
             <a href="mailto:play.lmjambi@gmail.com" className="social-icon" aria-label="Email">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e573e9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
             </a>
@@ -383,7 +395,7 @@ export default function CharacterPage() {
             <img src="/img/itchio.svg" alt="itch.io" width="24" height="24" />
             </a>
           </div>
-          <div className="copyright sm:text-2xl font-riscada text-center translate-y-2" style={{ color: '#e573e9' }}>
+          <div className="copyright text-base sm:text-2xl font-riscada text-center translate-y-1 sm:translate-y-2" style={{ color: '#e573e9' }}>
             <p>© 2025 All rights reserved to J@mbo</p>
             <p>Made with ★ in San Francisco, CA</p>
           </div>

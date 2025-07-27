@@ -69,7 +69,7 @@ body {
 /* Mobile-specific background styling */
 @media (max-width: 640px) {
   .mobile-bg {
-    background-size: cover !important;
-    background-position: center !important;
+    background-repeat: repeat !important;
+    background-size: auto !important;
   }
 }
