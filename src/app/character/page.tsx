@@ -257,7 +257,7 @@ export default function CharacterPage() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 relative z-10">
               <div>
-                <label className="block text-blue-800 font-medium mb-2 sm:mb-3 text-lg sm:text-2xl font-riscada transform translate-x-5 translate-y-9 sm:translate-x-6 rotate-4">Genre</label>
+                <label className="block text-blue-800 font-medium mb-2 sm:mb-3 text-lg sm:text-2xl font-riscada transform translate-x-5 sm:translate-y-0 translate-y-9 sm:translate-x-6 rotate-4">Genre</label>
                 <select value={genre} onChange={e => setGenre(e.target.value)} className="w-full max-w-xs sm:max-w-none p-3 sm:p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada rotate-4 text-lg sm:text-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all transform translate-x-3 sm:translate-x-5 translate-y-8 sm:-translate-y-2 rotate-1">
                   <option>Choose a genre...</option>
                   <option>Fantasy</option>
