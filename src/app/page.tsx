@@ -39,7 +39,7 @@ export default function Home() {
           <img
             src="/img/text-shadow-sm.PNG"
             alt="Shadow"
-            className="absolute inset-0 w-3/3 h-auto object-contain pointer-events-none select-none z-0 scale-100 translate-x-2 translate-y-10 block sm:hidden"
+            className="absolute inset-0 w-3/3 h-auto object-contain pointer-events-none select-none z-0 scale-100 translate-x-3 translate-y-9 block sm:hidden"
           />
           <img
             src="/img/text-shadow.PNG"
@@ -115,7 +115,7 @@ export default function Home() {
               {/* Comic Strip Button */}
               <button 
                 onClick={() => handleTypeSelect('comic')}
-                className="group bg-transparent rounded-xl p-0 border-none shadow-none text-center transform rotate-8 sm:rotate-8 hover:rotate-0 transition-all duration-300 focus:outline-none relative overflow-hidden -translate-x-16 sm:-translate-x-5 -translate-y-6 sm:translate-y-14 min-h-[140px] sm:min-h-[220px]"
+                className="group bg-transparent rounded-xl p-0 border-none shadow-none text-center transform rotate-8 sm:rotate-8 hover:rotate-0 transition-all duration-300 focus:outline-none relative overflow-hidden -translate-x-16 sm:-translate-x-5 -translate-y-8 sm:translate-y-14 min-h-[140px] sm:min-h-[220px]"
                 aria-label="Comic Strip"
               >
                 <span className="absolute inset-0 z-0">
