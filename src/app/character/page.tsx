@@ -220,7 +220,7 @@ export default function CharacterPage() {
           <img
             src="/img/text-shadow-sm.PNG"
             alt="Shadow"
-            className="absolute inset-0 w-2/3 sm:w-full h-auto object-contain pointer-events-none select-none z-0 scale-150 sm:scale-118 translate-x-18 translate-y-29 sm:translate-x-6 sm:translate-y-4 block sm:hidden"
+            className="absolute inset-0 w-2/3 sm:w-full h-auto object-contain pointer-events-none select-none z-0 scale-150 sm:scale-118 translate-x-18 translate-y-30 sm:translate-x-6 sm:translate-y-4 block sm:hidden"
           />
           <img
             src="/img/text-shadow.PNG"
@@ -231,7 +231,7 @@ export default function CharacterPage() {
           <img
             src="/img/text-bg-sm.PNG"
             alt="background"
-            className="absolute inset-0 w-2/3 sm:w-full h-auto object-contain pointer-events-none select-none z-0 rotate-3 scale-150 sm:scale-118 translate-x-15 translate-y-27 sm:translate-x-2 sm:-translate-y-2 block sm:hidden"
+            className="absolute inset-0 w-2/3 sm:w-full h-auto object-contain pointer-events-none select-none z-0 rotate-3 scale-150 sm:scale-118 translate-x-15 translate-y-28 sm:translate-x-2 sm:-translate-y-2 block sm:hidden"
           />
           <img
             src="/img/text-bg.PNG"
@@ -334,10 +334,16 @@ export default function CharacterPage() {
                     rel="noopener noreferrer"
                     className="block mb-2 sm:mb-4 break-inside-avoid transition-all group"
                     title={img.alt}
+                    onTouchStart={(e) => {
+                      e.currentTarget.classList.add('touch-active');
+                    }}
+                    onTouchEnd={(e) => {
+                      e.currentTarget.classList.remove('touch-active');
+                    }}
                   >
                     <div
                       className="relative w-full mx-auto"
-                      style={{ aspectRatio: `${aspectRatio}`, maxWidth: 320 }}
+                      style={{ aspectRatio: `${aspectRatio}`, maxWidth: 160 }}
                     >
                       <img
                         src={img.src}
@@ -357,7 +363,7 @@ export default function CharacterPage() {
                       />
                       {/* hover overlay for details */}
                       <div
-                        className="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10 p-2 sm:p-4 text-center rounded-lg"
+                        className="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center bg-white/80 opacity-0 group-hover:opacity-100 group-[.touch-active]:opacity-100 transition-opacity duration-200 z-10 p-2 sm:p-4 text-center rounded-lg"
                       >
                         <div className="text-blue-800 font-riscada text-sm sm:text-lg mb-2 break-words">
                           {img.alt?.slice(0, 120) || 'Untitled'}
