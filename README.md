@@ -5,6 +5,7 @@ Doodle Noodle is an art prompt generator designed to help artists create unique 
 *   **Art Prompt Generation:** Generates creative prompts tailored to character design, scene illustration, and comic strips.
 *   **Genre and Tone Selection:** Allows users to specify the desired genre (e.g., fantasy, cyberpunk, horror) and tone (e.g., whimsical, creepy, dramatic) of the prompt.
 *   **Keyword Input:** Enables users to add custom keywords to further refine the prompt.
+*   **Color Palette:** Gives the option to materialize users's visions better.
 *   **Inspiration Images:** Retrieves a mood board of relevant images from Unsplash, Pexels, and Pixabay based on the generated prompt.
 
 ## Usage
@@ -53,5 +54,8 @@ GET `/api/inspo-images?genre={genre}&tone={tone}&keywords={keywords}`
 
 ## Dependencies
 The project dependencies are listed in the `package.json` file.  Key dependencies include React, Next.js, and Tailwind CSS.
+
+## Contribution
+Contribution to the sentences' library (corpora) is appreciated! Add text and make your own branch for me to check :]
 
 *README.md was made with [Etchr](https://etchr.dev)*
