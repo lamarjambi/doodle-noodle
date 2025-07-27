@@ -203,7 +203,7 @@ export default function CharacterPage() {
       <header className="relative z-10 p-4 sm:p-6 sm:ml-10 md:ml-20">
         <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
           <a href="/">
-            <img src="/img/logo.PNG" alt="Logo" className="h-16 sm:h-20 md:h-26 w-auto mb-2 sm:mb-0 sm:mr-4" />
+            <img src="/img/logo.PNG" alt="Logo" className="h-20 sm:h-20 md:h-26 w-auto mb-2 sm:mb-0 sm:mr-4" />
           </a>
           <h1 className="text-3xl sm:text-5xl md:text-8xl font-normal text-blue-800 tracking-wide font-silly transform -rotate-1" style={{color: "#8587ed" }}>
             Doodle Noodle
@@ -253,7 +253,7 @@ export default function CharacterPage() {
                   style={{ pointerEvents: 'none' }}
                 />
               </a>
-              <h2 className="text-xl sm:text-3xl font-medium text-blue-800 rotate-4 font-riscada translate-x-6 sm:translate-x-6 translate-y-11 sm:-translate-y-4" style={{color: "#8587ed" }}>Character Design Details :3</h2>
+              <h2 className="text-xl sm:text-3xl font-medium text-blue-800 rotate-4 font-riscada translate-x-6 sm:translate-x-6 translate-y-12 sm:-translate-y-4" style={{color: "#8587ed" }}>Character Design Details :3</h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 relative z-10">
               <div>
@@ -287,7 +287,7 @@ export default function CharacterPage() {
                 <input type="text" value={palette} onChange={e => setPalette(e.target.value)} placeholder="pastels, neon, earth tones..." className="w-full max-w-xs sm:max-w-none p-3 sm:p-4 border-2 border-blue-300 rounded-lg bg-blue-50/80 text-blue-800 font-riscada text-lg sm:text-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all placeholder-blue-500 transform -translate-y-1 sm:-translate-y-2 -translate-x-1 sm:translate-x-3 rotate-4" />
               </div>
             </div>
-            <div className="mt-6 sm:mt-8 text-center relative z-10 -translate-y-3 -translate-x-3">
+            <div className="mt-6 sm:mt-8 text-center relative z-10 -translate-y-4 -translate-x-4">
               <button onClick={handleGenerate} className="group relative hover:scale-105 transition-all duration-300 rotate-1 hover:rotate-0 bg-transparent focus:outline-none" aria-label="Generate Prompt & Mood Board">
                 <img 
                   src="/img/generate.PNG" 

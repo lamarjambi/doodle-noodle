@@ -22,7 +22,7 @@ export default function Home() {
       {/* Header */}
       <header className="relative z-10 p-4 sm:p-6 sm:ml-10 md:ml-20">
         <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
-          <img src="/img/logo.PNG" alt="Logo" className="h-16 sm:h-20 md:h-26 w-auto mb-2 sm:mb-0 sm:mr-4" />
+          <img src="/img/logo.PNG" alt="Logo" className="h-20 sm:h-20 md:h-26 w-auto mb-2 sm:mb-0 sm:mr-4" />
           <h1 className="text-3xl sm:text-5xl md:text-8xl font-normal text-blue-800 tracking-wide font-silly transform -rotate-1" style={{color: "#8587ed" }}>
             Doodle Noodle
           </h1>
