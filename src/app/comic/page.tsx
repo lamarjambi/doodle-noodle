@@ -288,16 +288,23 @@ export default function ComicPage() {
               </div>
             </div>
             <div className="mt-6 sm:mt-8 text-center relative z-10 -translate-y-4 -translate-x-4">
-              <button onClick={handleGenerate} className="group relative hover:scale-105 transition-all duration-300 rotate-1 hover:rotate-0 bg-transparent focus:outline-none sm:translate-x-10" aria-label="Generate">
+              <button onClick={handleGenerate} className="group relative hover:scale-105 transition-all duration-300 rotate-1 hover:rotate-0 bg-transparent focus:outline-none sm:translate-x-10" aria-label="Generate"
+                onTouchStart={(e) => {
+                  e.currentTarget.classList.add('touch-active');
+                }}
+                onTouchEnd={(e) => {
+                  e.currentTarget.classList.remove('touch-active');
+                }}
+              >
                 <img 
                   src="/img/generate.PNG" 
                   alt="Generate" 
-                  className="w-32 sm:w-48 h-auto scale-120 transition-opacity duration-200 group-hover:opacity-0"
+                  className="w-32 sm:w-48 h-auto scale-120 transition-opacity duration-200 group-hover:opacity-0 group-[.touch-active]:opacity-0"
                 />
                 <img 
                   src="/img/generate-hover.PNG" 
                   alt="Generate" 
-                  className="absolute top-0 left-0 duration-200 opacity-0 group-hover:opacity-100 scale-120"
+                  className="absolute top-0 left-0 duration-200 opacity-0 group-hover:opacity-100 group-[.touch-active]:opacity-100 scale-120"
                   style={{ pointerEvents: 'none' }}
                 />
               </button>
