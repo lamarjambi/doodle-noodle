@@ -12,7 +12,7 @@ export default function Home() {
 
   return (
     <div 
-      className="min-h-screen"
+      className="min-h-screen overflow-x-hidden mobile-bg"
       style={{
         backgroundImage: "url('/img/notebook-bg.PNG')",
         backgroundRepeat: 'repeat',
@@ -20,47 +20,52 @@ export default function Home() {
       }}
     >
       {/* Header */}
-      <header className="relative z-10 p-6 ml-20">
-        <div className="flex items-center justify-center">
-          <img src="/img/logo.PNG" alt="Logo" className="h-26 w-auto mr-4" />
-          <h1 className="text-5xl md:text-8xl font-normal text-blue-800 tracking-wide font-silly transform -rotate-1" style={{color: "#8587ed" }}>
+      <header className="relative z-10 p-4 sm:p-6 sm:ml-10 md:ml-20">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
+          <img src="/img/logo.PNG" alt="Logo" className="h-16 sm:h-20 md:h-26 w-auto mb-2 sm:mb-0 sm:mr-4" />
+          <h1 className="text-3xl sm:text-5xl md:text-8xl font-normal text-blue-800 tracking-wide font-silly transform -rotate-1" style={{color: "#8587ed" }}>
             Doodle Noodle
           </h1>
         </div>
-        <p className="text-center text-blue-700 mt-2 font-riscada text-3xl transform rotate-1">
+        <p className="text-center text-blue-700 mt-2 font-riscada text-xl sm:text-2xl md:text-3xl transform rotate-1">
           For Artists, By An Artist
         </p>
       </header>
 
       {/* Main Content */}
-      <main className="relative z-10 max-w-4xl mx-auto px-6 pb-20 ml-20">
+      <main className="relative z-10 w-full max-w-4xl mx-auto px-2 sm:px-6 pb-20 sm:ml-10 md:ml-20">
         <div className="relative">
-          <img 
-            src="/img/text-shadow.PNG" 
-            alt="Shadow" 
-            className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 scale-160 translate-x-4 translate-y-20"
+          {/* Shadow Images: mobile and desktop */}
+          <img
+            src="/img/text-shadow-sm.PNG"
+            alt="Shadow"
+            className="absolute inset-0 w-3/3 h-auto object-contain pointer-events-none select-none z-0 scale-100 translate-x-2 translate-y-10 block sm:hidden"
           />
-          <img 
-            src="/img/text-bg.PNG" 
-            alt="background" 
-            className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 rotate-3 scale-160 translate-y-14"
+          <img
+            src="/img/text-shadow.PNG"
+            alt="Shadow"
+            className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 scale-160 translate-x-4 translate-y-20 hidden sm:block"
           />
-          <div className="p-8 transform -rotate-1 relative z-10">
-            {/* Notebook paper lines effect */}
-            <div className="absolute inset-0 opacity-20 pointer-events-none">
-              {[...Array(15)].map((_, i) => (
-                <div key={i} className="border-b border-blue-200 h-8"></div>
-              ))}
-            </div>
-            <h2 className="text-4xl font-medium text-blue-800 mb-8 text-center font-riscada relative z-10 transform rotate-4 translate-y-4.5">
+          {/* Background Images: mobile and desktop */}
+          <img
+            src="/img/text-bg-sm.PNG"
+            alt="background"
+            className="absolute inset-0 w-3/3 h-auto object-contain pointer-events-none select-none z-0 rotate-3 scale-100 translate-y-6 block sm:hidden"
+          />
+          <img
+            src="/img/text-bg.PNG"
+            alt="background"
+            className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-0 rotate-3 scale-160 translate-y-14 hidden sm:block"
+          />
+          <div className="p-4 sm:p-8 transform -rotate-1 relative z-10">
+            <h2 className="text-2xl sm:text-4xl font-medium text-blue-800 mb-4 sm:mb-8 text-center font-riscada relative z-10 transform rotate-4 translate-y-2 sm:translate-y-4.5 mt-8 sm:mt-0">
               What would you like to create?
             </h2>
-            <div className="grid md:grid-cols-3 gap-6 relative z-10">
+            <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 relative z-10">
               {/* Character Design Button */}
               <button 
                 onClick={() => handleTypeSelect('character')}
-                className="group bg-transparent rounded-xl p-0 border-none shadow-none text-center transform rotate-5 hover:rotate-0 transition-all duration-300 focus:outline-none relative overflow-hidden translate-x-3 translate-y-6"
-                style={{ minHeight: '220px' }}
+                className="group bg-transparent rounded-xl p-0 border-none shadow-none text-center transform rotate-5 hover:rotate-0 transition-all duration-300 focus:outline-none relative overflow-hidden -translate-x-16 sm:translate-x-3 translate-y-2 sm:translate-y-6 min-h-[140px] sm:min-h-[220px]"
                 aria-label="Character Design"
               >
                 <span className="absolute inset-0 z-0">
@@ -77,7 +82,7 @@ export default function Home() {
                 </span>
                 {/* Overlay text on hover */}
                 <span className="absolute inset-0 flex flex-col items-center justify-center z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="text-2xl md:text-3xl font-medium text-black-800 font-riscada px-6 py-3">
+                  <span className="text-lg sm:text-2xl md:text-3xl font-medium text-black-800 font-riscada px-4 sm:px-6 py-2 sm:py-3">
                     Character Design
                   </span>
                 </span>
@@ -85,8 +90,7 @@ export default function Home() {
               {/* Scene Illustration Button */}
               <button 
                 onClick={() => handleTypeSelect('scene')}
-                className="group bg-transparent rounded-xl p-0 border-none shadow-none text-center transform -rotate-4 hover:rotate-0 transition-all duration-300 focus:outline-none relative overflow-hidden -translate-x-3 translate-y-7"
-                style={{ minHeight: '220px' }}
+                className="group bg-transparent rounded-xl p-0 border-none shadow-none text-center transform -rotate-4 hover:rotate-0 transition-all duration-300 focus:outline-none relative overflow-hidden translate-x-12 sm:-translate-x-3 -translate-y-2 sm:translate-y-7 min-h-[140px] sm:min-h-[220px]"
                 aria-label="Scene Illustration"
               >
                 <span className="absolute inset-0 z-0">
@@ -103,7 +107,7 @@ export default function Home() {
                 </span>
                 {/* Overlay text on hover */}
                 <span className="absolute inset-0 flex flex-col items-center justify-center z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="text-2xl md:text-3xl font-medium text-blue-800 font-riscada px-6 py-3">
+                  <span className="text-lg sm:text-2xl md:text-3xl font-medium text-blue-800 font-riscada px-4 sm:px-6 py-2 sm:py-3">
                     Scene Illustration
                   </span>
                 </span>
@@ -111,8 +115,7 @@ export default function Home() {
               {/* Comic Strip Button */}
               <button 
                 onClick={() => handleTypeSelect('comic')}
-                className="group bg-transparent rounded-xl p-0 border-none shadow-none text-center transform rotate-8 hover:rotate-0 transition-all duration-300 focus:outline-none relative overflow-hidden -translate-x-5 translate-y-14"
-                style={{ minHeight: '220px' }}
+                className="group bg-transparent rounded-xl p-0 border-none shadow-none text-center transform rotate-8 sm:rotate-8 hover:rotate-0 transition-all duration-300 focus:outline-none relative overflow-hidden -translate-x-16 sm:-translate-x-5 -translate-y-6 sm:translate-y-14 min-h-[140px] sm:min-h-[220px]"
                 aria-label="Comic Strip"
               >
                 <span className="absolute inset-0 z-0">
@@ -129,7 +132,7 @@ export default function Home() {
                 </span>
                 {/* Overlay text on hover */}
                 <span className="absolute inset-0 flex flex-col items-center justify-center z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="text-2xl md:text-3xl font-medium text-red-800 font-riscada px-6 py-3">
+                  <span className="text-lg sm:text-2xl md:text-3xl font-medium text-red-800 font-riscada px-4 sm:px-6 py-2 sm:py-3">
                     Comic Strip
                   </span>
                 </span>
@@ -139,9 +142,9 @@ export default function Home() {
         </div>
       </main>
       {/* FOOTER */}
-      <footer className="footer w-full mt-40 min-h-[160px]" style={{ background: 'transparent' }}>
-        <div className="footer-content flex flex-col items-center justify-center py-16">
-          <div className="social-links flex flex-row space-x-6 mb-2">
+      <footer className="footer w-full mt-20 sm:mt-40 min-h-[120px] sm:min-h-[160px]" style={{ background: 'transparent' }}>
+        <div className="footer-content flex flex-col items-center justify-center py-8 sm:py-16">
+          <div className="social-links flex flex-wrap flex-row space-x-4 sm:space-x-6 mb-2 justify-center">
             <a href="mailto:play.lmjambi@gmail.com" className="social-icon" aria-label="Email">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e573e9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
             </a>
@@ -158,7 +161,7 @@ export default function Home() {
             <img src="/img/itchio.svg" alt="itch.io" width="24" height="24" />
             </a>
           </div>
-          <div className="copyright sm:text-2xl font-riscada text-center translate-y-2" style={{ color: '#e573e9' }}>
+          <div className="copyright text-base sm:text-2xl font-riscada text-center translate-y-1 sm:translate-y-2" style={{ color: '#e573e9' }}>
             <p>© 2025 All rights reserved to J@mbo</p>
             <p>Made with ★ in San Francisco, CA</p>
           </div>
