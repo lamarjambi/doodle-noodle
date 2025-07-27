@@ -81,7 +81,7 @@ export default function Home() {
                   />
                 </span>
                 {/* Overlay text on hover */}
-                <span className="absolute inset-0 flex flex-col items-center justify-center z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span className="absolute inset-0 flex flex-col items-center justify-center z-20 pointer-events-none opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300">
                   <span className="text-lg sm:text-2xl md:text-3xl font-medium text-black-800 font-riscada px-4 sm:px-6 py-2 sm:py-3">
                     Character Design
                   </span>
@@ -106,7 +106,7 @@ export default function Home() {
                   />
                 </span>
                 {/* Overlay text on hover */}
-                <span className="absolute inset-0 flex flex-col items-center justify-center z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span className="absolute inset-0 flex flex-col items-center justify-center z-20 pointer-events-none opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300">
                   <span className="text-lg sm:text-2xl md:text-3xl font-medium text-blue-800 font-riscada px-4 sm:px-6 py-2 sm:py-3">
                     Scene Illustration
                   </span>
@@ -131,7 +131,7 @@ export default function Home() {
                   />
                 </span>
                 {/* Overlay text on hover */}
-                <span className="absolute inset-0 flex flex-col items-center justify-center z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span className="absolute inset-0 flex flex-col items-center justify-center z-20 pointer-events-none opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300">
                   <span className="text-lg sm:text-2xl md:text-3xl font-medium text-red-800 font-riscada px-4 sm:px-6 py-2 sm:py-3">
                     Comic Strip
                   </span>
