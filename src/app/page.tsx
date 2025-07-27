@@ -161,7 +161,7 @@ export default function Home() {
       </main>
       {/* FOOTER */}
       <footer className="footer w-full mt-20 sm:mt-40 min-h-[120px] sm:min-h-[160px]" style={{ background: 'transparent' }}>
-        <div className="footer-content flex flex-col items-center justify-center py-8 sm:py-16">
+        <div className="footer-content flex flex-col items-center justify-center py-8 sm:py-10">
           <div className="social-links flex flex-wrap flex-row space-x-4 sm:space-x-6 mb-2 justify-center">
             <a href="mailto:play.lmjambi@gmail.com" className="social-icon" aria-label="Email">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e573e9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
@@ -185,6 +185,17 @@ export default function Home() {
           </div>
         </div>
       </footer>
+      
+      {/* Buy Me A Coffee Button */}
+      <div className="flex justify-center pb-8">
+        <a href="https://www.buymeacoffee.com/playlamar" target="_blank" rel="noopener noreferrer">
+          <img 
+            src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png" 
+            alt="Buy Me A Coffee" 
+            style={{ height: '40px !important', width: '145px !important' }}
+          />
+        </a>
+      </div>
     </div>
   );
 } 
