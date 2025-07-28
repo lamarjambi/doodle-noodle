@@ -73,24 +73,12 @@ async function fetchUserUploads(genre: string, tone: string) {
       .expression('folder:doodle-noodle-inspo')
       .sort_by('created_at', 'desc')
       .max_results(50)
-      .with_field('context')
-      .with_field('custom_metadata')
-      .with_field('tags')
       .execute();
 
     console.log('Cloudinary search result:', result);
     const uploads = result.resources || [];
     
     console.log('Found uploads:', uploads.length);
-    console.log('First upload details:', uploads[0] ? {
-      public_id: uploads[0].public_id,
-      context: uploads[0].context,
-      custom_metadata: uploads[0].custom_metadata,
-      tags: uploads[0].tags
-    } : 'No uploads found');
-
-    // For now, just use the uploads as-is to ensure images show up
-    const uploadsWithMetadata = uploads;
     console.log('Search criteria - genre:', genre, 'tone:', tone);
     
     // Get stored metadata from global scope (fallback only)
@@ -98,7 +86,7 @@ async function fetchUserUploads(genre: string, tone: string) {
     
     console.log('Retrieved metadata from global scope:', storedMetadata);
     
-    return uploadsWithMetadata
+    return uploads
       .filter((upload: any) => {
         // Get metadata from stored metadata first, then fallback to Cloudinary context
         const metadata = storedMetadata[upload.public_id];
@@ -154,8 +142,8 @@ async function fetchUserUploads(genre: string, tone: string) {
         
         console.log('Match result:', { hasMatchingGenre, hasMatchingTone });
         
-        // Show all uploads for now
-        return true;
+        // Temporarily show all uploads for debugging
+        return true; // hasMatchingGenre || hasMatchingTone;
       })
       .map((upload: any) => {
         // Get metadata from stored metadata first, then fallback to Cloudinary data
