@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { writeFile, mkdir } from 'fs/promises';
-import { join } from 'path';
-import { existsSync } from 'fs';
+
+// Simple in-memory storage for development
+// In production, you'd use a database
+const uploads: any[] = [];
 
 export async function POST(req: NextRequest) {
   try {
@@ -27,41 +28,31 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Create uploads directory if it doesn't exist
-    const uploadsDir = join(process.cwd(), 'public', 'uploads');
-    if (!existsSync(uploadsDir)) {
-      await mkdir(uploadsDir, { recursive: true });
-    }
-
-    // Convert file to buffer and save
+    // Convert file to base64 for storage
     const bytes = await image.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    
-    const timestamp = Date.now();
-    const filename = `inspo-${timestamp}.${image.name.split('.').pop()}`;
-    const filepath = join(uploadsDir, filename);
-    
-    await writeFile(filepath, buffer);
+    const base64 = buffer.toString('base64');
+    const dataUrl = `data:${image.type};base64,${base64}`;
 
-    // Create metadata
+    // Create metadata object
     const metadata = {
-      id: timestamp,
-      filename,
+      id: Date.now(),
       artistName,
       imageLink: imageLink || '',
       genres: genres.split(',').map((g: string) => g.trim()),
       tones: tones.split(',').map((t: string) => t.trim()),
       uploadedAt: new Date().toISOString(),
+      dataUrl: dataUrl,
     };
 
-    // Save metadata
-    const metadataPath = join(uploadsDir, `${timestamp}.json`);
-    await writeFile(metadataPath, JSON.stringify(metadata, null, 2));
+    // Store in memory (for development)
+    uploads.push(metadata);
+    (global as any).uploads = uploads;
 
     return NextResponse.json({
       success: true,
       image: {
-        src: `/uploads/${filename}`,
+        src: dataUrl,
         alt: `Artwork by ${artistName}`,
         link: imageLink || '#',
         source: 'user-upload',

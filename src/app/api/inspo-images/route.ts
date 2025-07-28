@@ -52,46 +52,25 @@ async function fetchPixabay(query: string) {
 
 async function fetchUserUploads(genre: string, tone: string) {
   try {
-    const { readdir, readFile } = await import('fs/promises');
-    const { existsSync } = await import('fs');
-    const { join } = await import('path');
+    // Import the uploads array from the upload API
+    // This is a simple solution for development
+    const uploads = (global as any).uploads || [];
     
-    const uploadsDir = join(process.cwd(), 'public', 'uploads');
-    if (!existsSync(uploadsDir)) {
-      return [];
-    }
-
-    const files = await readdir(uploadsDir);
-    const jsonFiles = files.filter(file => file.endsWith('.json'));
-    
-    const uploads = [];
-    for (const jsonFile of jsonFiles) {
-      try {
-        const metadataPath = join(uploadsDir, jsonFile);
-        const metadataContent = await readFile(metadataPath, 'utf-8');
-        const metadata = JSON.parse(metadataContent);
-        
-        // Check if this upload matches the search criteria (OR-based)
-        const hasMatchingGenre = !genre || genre === 'Choose a genre...' || metadata.genres.some((g: string) => g.toLowerCase() === genre.toLowerCase());
-        const hasMatchingTone = !tone || tone === 'Pick a tone...' || metadata.tones.some((t: string) => t.toLowerCase() === tone.toLowerCase());
-        
-        if (hasMatchingGenre || hasMatchingTone) {
-          uploads.push({
-            src: metadata.filename ? `/uploads/${metadata.filename}` : '',
-            alt: `Artwork by ${metadata.artistName}`,
-            link: metadata.imageLink || '#',
-            source: 'user-upload',
-            artistName: metadata.artistName,
-            genres: metadata.genres,
-            tones: metadata.tones,
-          });
-        }
-      } catch (error) {
-        console.error(`Error reading metadata file ${jsonFile}:`, error);
-      }
-    }
-    
-    return uploads;
+    return uploads.filter((upload: any) => {
+      // Check if this upload matches the search criteria (OR-based)
+      const hasMatchingGenre = !genre || genre === 'Choose a genre...' || upload.genres.some((g: string) => g.toLowerCase() === genre.toLowerCase());
+      const hasMatchingTone = !tone || tone === 'Pick a tone...' || upload.tones.some((t: string) => t.toLowerCase() === tone.toLowerCase());
+      
+      return hasMatchingGenre || hasMatchingTone;
+    }).map((upload: any) => ({
+      src: upload.dataUrl,
+      alt: `Artwork by ${upload.artistName}`,
+      link: upload.imageLink || '#',
+      source: 'user-upload',
+      artistName: upload.artistName,
+      genres: upload.genres,
+      tones: upload.tones,
+    }));
   } catch (error) {
     console.error('Error fetching user uploads:', error);
     return [];
