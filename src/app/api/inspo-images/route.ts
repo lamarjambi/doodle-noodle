@@ -73,12 +73,45 @@ async function fetchUserUploads(genre: string, tone: string) {
       .expression('folder:doodle-noodle-inspo')
       .sort_by('created_at', 'desc')
       .max_results(50)
+      .with_field('context')
+      .with_field('custom_metadata')
+      .with_field('tags')
       .execute();
 
     console.log('Cloudinary search result:', result);
     const uploads = result.resources || [];
     
     console.log('Found uploads:', uploads.length);
+    console.log('First upload details:', uploads[0] ? {
+      public_id: uploads[0].public_id,
+      context: uploads[0].context,
+      custom_metadata: uploads[0].custom_metadata,
+      tags: uploads[0].tags
+    } : 'No uploads found');
+
+    // If metadata is missing, try to fetch individual image details
+    const uploadsWithMetadata = await Promise.all(
+      uploads.map(async (upload: any) => {
+        if (!upload.context && !upload.custom_metadata) {
+          try {
+            console.log('Fetching individual metadata for:', upload.public_id);
+            const individualResult = await cloudinary.v2.api.resource(upload.public_id, {
+              fields: 'context,custom_metadata,tags'
+            });
+            return {
+              ...upload,
+              context: individualResult.context,
+              custom_metadata: individualResult.custom_metadata,
+              tags: individualResult.tags
+            };
+          } catch (error) {
+            console.error('Error fetching individual metadata for', upload.public_id, ':', error);
+            return upload;
+          }
+        }
+        return upload;
+      })
+    );
     console.log('Search criteria - genre:', genre, 'tone:', tone);
     
     // Get stored metadata from global scope (fallback only)
@@ -86,7 +119,7 @@ async function fetchUserUploads(genre: string, tone: string) {
     
     console.log('Retrieved metadata from global scope:', storedMetadata);
     
-    return uploads
+    return uploadsWithMetadata
       .filter((upload: any) => {
         // Get metadata from stored metadata first, then fallback to Cloudinary context
         const metadata = storedMetadata[upload.public_id];
