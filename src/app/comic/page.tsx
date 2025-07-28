@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
+import CloudinaryUpload from '../../components/CloudinaryUpload';
 
 export default function ComicPage() {
   // Remove hardcoded corpora
@@ -574,12 +575,14 @@ export default function ComicPage() {
                 
                 <div>
                   <label className="block text-blue-800 font-medium mb-2 text-lg font-riscada">Upload Image *</label>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => setUploadForm({...uploadForm, image: e.target.files?.[0] || null})}
-                    className="w-full p-3 border-2 border-blue-300 rounded-lg bg-white text-blue-800 font-riscada text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-                    required
+                  <CloudinaryUpload
+                    onUpload={(result) => {
+                      setUploadForm({
+                        ...uploadForm,
+                        image: result.info.file
+                      });
+                    }}
+                    onError={(error) => setUploadError(error)}
                   />
                 </div>
                 
