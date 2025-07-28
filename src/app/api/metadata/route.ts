@@ -46,8 +46,39 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ metadata: metadataStore });
     }
 
-    const metadata = metadataStore[publicId];
-    return NextResponse.json({ metadata });
+    // Try to get metadata from Cloudinary as well
+    try {
+      const cloudinary = await import('cloudinary');
+      cloudinary.v2.config({
+        cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+        api_key: process.env.CLOUDINARY_API_KEY,
+        api_secret: process.env.CLOUDINARY_API_SECRET,
+      });
+
+      const result = await cloudinary.v2.api.resource(publicId, {
+        type: 'upload'
+      });
+
+      const cloudinaryMetadata = {
+        context: result.context || {},
+        custom_metadata: result.custom_metadata || {},
+        tags: result.tags || [],
+        public_id: result.public_id,
+        secure_url: result.secure_url
+      };
+
+      const localMetadata = metadataStore[publicId];
+      
+      return NextResponse.json({ 
+        metadata: localMetadata,
+        cloudinaryMetadata: cloudinaryMetadata,
+        globalMetadata: (global as any).uploadMetadata?.[publicId]
+      });
+    } catch (cloudinaryError) {
+      console.error('Error fetching from Cloudinary:', cloudinaryError);
+      const metadata = metadataStore[publicId];
+      return NextResponse.json({ metadata });
+    }
   } catch (error) {
     console.error('Metadata retrieval error:', error);
     return NextResponse.json(

@@ -88,11 +88,19 @@ async function fetchUserUploads(genre: string, tone: string) {
     
     return uploads
       .filter((upload: any) => {
-        // Get metadata from stored metadata first, then fallback to Cloudinary context
+        // Get metadata from stored metadata first, then fallback to Cloudinary data
         const metadata = storedMetadata[upload.public_id];
         const tags = upload.tags || [];
         const context = upload.context || {};
         const customMetadata = upload.custom_metadata || {};
+        
+        console.log('Processing upload:', upload.public_id);
+        console.log('Raw upload data:', {
+          tags,
+          context,
+          customMetadata,
+          storedMetadata: metadata
+        });
         
         // Use stored metadata if available, otherwise fallback to Cloudinary data
         let artistName = metadata?.artistName || 'Unknown Artist';
@@ -123,13 +131,11 @@ async function fetchUserUploads(genre: string, tone: string) {
           }
         }
         
-        console.log('Upload:', {
-          public_id: upload.public_id,
-          metadata: metadata,
-          tags: tags,
-          context: context,
-          uploadGenres: uploadGenres,
-          uploadTones: uploadTones
+        console.log('Extracted metadata:', {
+          artistName,
+          imageLink,
+          uploadGenres,
+          uploadTones
         });
         
         // Check if this upload matches the search criteria (OR-based)
@@ -142,8 +148,8 @@ async function fetchUserUploads(genre: string, tone: string) {
         
         console.log('Match result:', { hasMatchingGenre, hasMatchingTone });
         
-        // Temporarily show all uploads for debugging
-        return true; // hasMatchingGenre || hasMatchingTone;
+        // Return true if either genre or tone matches (OR logic)
+        return hasMatchingGenre || hasMatchingTone;
       })
       .map((upload: any) => {
         // Get metadata from stored metadata first, then fallback to Cloudinary data

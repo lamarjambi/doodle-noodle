@@ -101,6 +101,7 @@ export async function POST(req: NextRequest) {
         api_secret: process.env.CLOUDINARY_API_SECRET,
       });
       
+      // Store metadata in both context and custom_metadata for better retrieval
       await cloudinary.v2.uploader.explicit(cloudinaryResult.public_id, {
         type: 'upload',
         context: {
@@ -114,7 +115,9 @@ export async function POST(req: NextRequest) {
           image_link: imageLink || '',
           genres: genres,
           tones: tones,
-        }
+        },
+        // Also add tags for easier filtering
+        tags: [...genres.split(',').map((g: string) => g.trim()), ...tones.split(',').map((t: string) => t.trim())]
       });
       console.log('Metadata saved to Cloudinary');
     } catch (error) {

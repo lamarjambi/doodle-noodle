@@ -172,7 +172,10 @@ export default function ComicPage() {
     setInspoError('');
     fetch(`/api/inspo-images?genre=${encodeURIComponent(genre)}&tone=${encodeURIComponent(tone)}&keywords=${encodeURIComponent([emotion, palette, keywords].filter(Boolean).join(' '))}`)
       .then(res => res.ok ? res.json() : Promise.reject('Failed to fetch'))
-      .then(data => setInspoImages(data.images || []))
+      .then(data => {
+        console.log('Received inspo images:', data);
+        setInspoImages(data.images || []);
+      })
       .catch(() => setInspoError('Could not load inspiration images.'))
       .finally(() => setLoadingInspo(false));
   }, [showInspo, genre, tone, emotion, palette, keywords]);
