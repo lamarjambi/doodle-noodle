@@ -39,10 +39,3 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-# user uploads (keep directory structure but ignore actual files)
-public/uploads/*.jpg
-public/uploads/*.jpeg
-public/uploads/*.png
-public/uploads/*.gif
-public/uploads/*.webp
