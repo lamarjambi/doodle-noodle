@@ -92,6 +92,35 @@ export async function POST(req: NextRequest) {
 
     console.log('Stored metadata for', cloudinaryResult.public_id, ':', metadata);
 
+    // Store metadata in Cloudinary context for persistence
+    try {
+      const cloudinary = await import('cloudinary');
+      cloudinary.v2.config({
+        cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+        api_key: process.env.CLOUDINARY_API_KEY,
+        api_secret: process.env.CLOUDINARY_API_SECRET,
+      });
+      
+      await cloudinary.v2.uploader.explicit(cloudinaryResult.public_id, {
+        type: 'upload',
+        context: {
+          artist_name: artistName,
+          image_link: imageLink || '',
+          genres: genres,
+          tones: tones,
+        },
+        custom_metadata: {
+          artist_name: artistName,
+          image_link: imageLink || '',
+          genres: genres,
+          tones: tones,
+        }
+      });
+      console.log('Metadata saved to Cloudinary');
+    } catch (error) {
+      console.error('Error saving metadata to Cloudinary:', error);
+    }
+
     return NextResponse.json({
       success: true,
       image: {

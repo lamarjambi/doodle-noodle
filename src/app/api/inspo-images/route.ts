@@ -81,8 +81,9 @@ async function fetchUserUploads(genre: string, tone: string) {
     console.log('Found uploads:', uploads.length);
     console.log('Search criteria - genre:', genre, 'tone:', tone);
     
-    // Get stored metadata from global scope
-    const storedMetadata = (global as any).uploadMetadata || {};
+    // Get stored metadata from global scope (fallback only)
+    let storedMetadata = (global as any).uploadMetadata || {};
+    
     console.log('Retrieved metadata from global scope:', storedMetadata);
     
     return uploads
