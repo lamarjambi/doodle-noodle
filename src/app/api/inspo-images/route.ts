@@ -89,29 +89,8 @@ async function fetchUserUploads(genre: string, tone: string) {
       tags: uploads[0].tags
     } : 'No uploads found');
 
-    // If metadata is missing, try to fetch individual image details
-    const uploadsWithMetadata = await Promise.all(
-      uploads.map(async (upload: any) => {
-        if (!upload.context && !upload.custom_metadata) {
-          try {
-            console.log('Fetching individual metadata for:', upload.public_id);
-            const individualResult = await cloudinary.v2.api.resource(upload.public_id, {
-              fields: 'context,custom_metadata,tags'
-            });
-            return {
-              ...upload,
-              context: individualResult.context,
-              custom_metadata: individualResult.custom_metadata,
-              tags: individualResult.tags
-            };
-          } catch (error) {
-            console.error('Error fetching individual metadata for', upload.public_id, ':', error);
-            return upload;
-          }
-        }
-        return upload;
-      })
-    );
+    // For now, just use the uploads as-is to ensure images show up
+    const uploadsWithMetadata = uploads;
     console.log('Search criteria - genre:', genre, 'tone:', tone);
     
     // Get stored metadata from global scope (fallback only)
@@ -175,8 +154,8 @@ async function fetchUserUploads(genre: string, tone: string) {
         
         console.log('Match result:', { hasMatchingGenre, hasMatchingTone });
         
-        // Temporarily show all uploads for debugging
-        return true; // hasMatchingGenre || hasMatchingTone;
+        // Show all uploads for now
+        return true;
       })
       .map((upload: any) => {
         // Get metadata from stored metadata first, then fallback to Cloudinary data
