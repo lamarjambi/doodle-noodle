@@ -1,7 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { readdir, readFile } from 'fs/promises';
-import { join } from 'path';
-import { existsSync } from 'fs';
 
 const UNSPLASH_ACCESS_KEY = process.env.UNSPLASH_ACCESS_KEY;
 const PEXELS_API_KEY = process.env.PEXELS_API_KEY;
@@ -55,74 +52,46 @@ async function fetchPixabay(query: string) {
 
 async function fetchUserUploads(genre: string, tone: string) {
   try {
-    const uploadsDir = join(process.cwd(), 'public', 'uploads');
+    const { readdir, readFile } = await import('fs/promises');
+    const { existsSync } = await import('fs');
+    const { join } = await import('path');
     
+    const uploadsDir = join(process.cwd(), 'public', 'uploads');
     if (!existsSync(uploadsDir)) {
       return [];
     }
 
     const files = await readdir(uploadsDir);
-    const metadataFiles = files.filter(file => file.endsWith('.json'));
+    const jsonFiles = files.filter(file => file.endsWith('.json'));
     
-    const userImages = [];
-
-    for (const metadataFile of metadataFiles) {
+    const uploads = [];
+    for (const jsonFile of jsonFiles) {
       try {
-        const metadataPath = join(uploadsDir, metadataFile);
+        const metadataPath = join(uploadsDir, jsonFile);
         const metadataContent = await readFile(metadataPath, 'utf-8');
         const metadata = JSON.parse(metadataContent);
-
-        // Check if image file exists
-        const imagePath = join(uploadsDir, metadata.filename);
-        if (!existsSync(imagePath)) continue;
-
-        // Filter by genre and tone if specified - show if ANY tag matches
-        let shouldInclude = false;
         
-        // If no filters are specified, include all images
-        if (!genre && !tone) {
-          shouldInclude = true;
-        } else {
-          // Check if ANY of the search criteria match the image tags
-          if (genre) {
-            const genreMatches = metadata.genres.some((g: string) => 
-              g.toLowerCase().includes(genre.toLowerCase())
-            );
-            if (genreMatches) shouldInclude = true;
-          }
-          
-          if (tone) {
-            const toneMatches = metadata.tones.some((t: string) => 
-              t.toLowerCase().includes(tone.toLowerCase())
-            );
-            if (toneMatches) shouldInclude = true;
-          }
-        }
+        // Check if this upload matches the search criteria (OR-based)
+        const hasMatchingGenre = !genre || genre === 'Choose a genre...' || metadata.genres.some((g: string) => g.toLowerCase() === genre.toLowerCase());
+        const hasMatchingTone = !tone || tone === 'Pick a tone...' || metadata.tones.some((t: string) => t.toLowerCase() === tone.toLowerCase());
         
-        if (!shouldInclude) {
-          continue;
+        if (hasMatchingGenre || hasMatchingTone) {
+          uploads.push({
+            src: metadata.filename ? `/uploads/${metadata.filename}` : '',
+            alt: `Artwork by ${metadata.artistName}`,
+            link: metadata.imageLink || '#',
+            source: 'user-upload',
+            artistName: metadata.artistName,
+            genres: metadata.genres,
+            tones: metadata.tones,
+          });
         }
-
-        userImages.push({
-          src: `/uploads/${metadata.filename}`,
-          alt: `Artwork by ${metadata.artistName}`,
-          link: metadata.imageLink || '#',
-          source: 'user-upload',
-          artistName: metadata.artistName,
-          genres: metadata.genres,
-          tones: metadata.tones,
-          uploadedAt: metadata.uploadedAt,
-        });
       } catch (error) {
-        console.error(`Error reading metadata file ${metadataFile}:`, error);
-        continue;
+        console.error(`Error reading metadata file ${jsonFile}:`, error);
       }
     }
-
-    // Sort by upload date (newest first)
-    userImages.sort((a, b) => new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime());
-    return userImages;
-
+    
+    return uploads;
   } catch (error) {
     console.error('Error fetching user uploads:', error);
     return [];

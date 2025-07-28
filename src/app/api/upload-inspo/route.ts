@@ -33,28 +33,28 @@ export async function POST(req: NextRequest) {
       await mkdir(uploadsDir, { recursive: true });
     }
 
-    // Generate unique filename
-    const timestamp = Date.now();
-    const fileExtension = image.name.split('.').pop();
-    const filename = `inspo-${timestamp}.${fileExtension}`;
-    const filepath = join(uploadsDir, filename);
-
     // Convert file to buffer and save
     const bytes = await image.arrayBuffer();
     const buffer = Buffer.from(bytes);
+    
+    const timestamp = Date.now();
+    const filename = `inspo-${timestamp}.${image.name.split('.').pop()}`;
+    const filepath = join(uploadsDir, filename);
+    
     await writeFile(filepath, buffer);
 
-    // Create metadata file to store additional info
+    // Create metadata
     const metadata = {
       id: timestamp,
       filename,
       artistName,
       imageLink: imageLink || '',
-      genres: genres.split(',').map(g => g.trim()),
-      tones: tones.split(',').map(t => t.trim()),
+      genres: genres.split(',').map((g: string) => g.trim()),
+      tones: tones.split(',').map((t: string) => t.trim()),
       uploadedAt: new Date().toISOString(),
     };
 
+    // Save metadata
     const metadataPath = join(uploadsDir, `${timestamp}.json`);
     await writeFile(metadataPath, JSON.stringify(metadata, null, 2));
 
@@ -74,12 +74,6 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     console.error('Upload error:', error);
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    console.error('Error details:', {
-      message: errorMessage,
-      stack: error instanceof Error ? error.stack : undefined,
-      uploadsDir: join(process.cwd(), 'public', 'uploads'),
-      exists: existsSync(join(process.cwd(), 'public', 'uploads'))
-    });
     return NextResponse.json(
       { error: `Failed to upload image: ${errorMessage}` },
       { status: 500 }
