@@ -151,6 +151,19 @@ export default function CharacterPage() {
   const [showInspo, setShowInspo] = useState(false);
   const [imageAspectRatios, setImageAspectRatios] = useState<{ [key: number]: number }>({});
 
+  // --- Upload State ---
+  const [showUploadModal, setShowUploadModal] = useState(false);
+  const [uploadForm, setUploadForm] = useState({
+    image: null as File | null,
+    artistName: '',
+    imageLink: '',
+    selectedGenres: [] as string[],
+    selectedTones: [] as string[]
+  });
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState('');
+  const [uploadSuccess, setUploadSuccess] = useState(false);
+
   // Fetch inspiration images after prompt is generated
   useEffect(() => {
     if (!showInspo) return;
@@ -173,6 +186,79 @@ export default function CharacterPage() {
     const combinedPrompt = promptParts.join(' ');
     setPrompt(combinedPrompt);
     setShowInspo(true);
+  };
+
+  // Handle image upload
+  const handleImageUpload = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!uploadForm.image || !uploadForm.artistName || uploadForm.selectedGenres.length === 0 || uploadForm.selectedTones.length === 0) {
+      setUploadError('Please fill in all required fields');
+      return;
+    }
+
+    setUploading(true);
+    setUploadError('');
+
+    const formData = new FormData();
+    formData.append('image', uploadForm.image);
+    formData.append('artistName', uploadForm.artistName);
+    formData.append('imageLink', uploadForm.imageLink);
+    formData.append('genres', uploadForm.selectedGenres.join(','));
+    formData.append('tones', uploadForm.selectedTones.join(','));
+
+    try {
+      const response = await fetch('/api/upload-inspo', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (response.ok) {
+        setUploadSuccess(true);
+        setUploadForm({
+          image: null,
+          artistName: '',
+          imageLink: '',
+          selectedGenres: [],
+          selectedTones: []
+        });
+        setShowUploadModal(false);
+        
+        // Refresh the inspo images to include the new upload
+        setLoadingInspo(true);
+        fetch(`/api/inspo-images?genre=${encodeURIComponent(genre)}&tone=${encodeURIComponent(tone)}&keywords=${encodeURIComponent([emotion, palette, keywords].filter(Boolean).join(' '))}`)
+          .then(res => res.ok ? res.json() : Promise.reject('Failed to fetch'))
+          .then(data => setInspoImages(data.images || []))
+          .catch(() => setInspoError('Could not load inspiration images.'))
+          .finally(() => setLoadingInspo(false));
+      } else {
+        const error = await response.json();
+        setUploadError(error.error || 'Upload failed');
+      }
+    } catch (error) {
+      setUploadError('Upload failed. Please try again.');
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  // Toggle genre selection
+  const toggleGenre = (genre: string) => {
+    setUploadForm(prev => ({
+      ...prev,
+      selectedGenres: prev.selectedGenres.includes(genre)
+        ? prev.selectedGenres.filter(g => g !== genre)
+        : [...prev.selectedGenres, genre]
+    }));
+  };
+
+  // Toggle tone selection
+  const toggleTone = (tone: string) => {
+    setUploadForm(prev => ({
+      ...prev,
+      selectedTones: prev.selectedTones.includes(tone)
+        ? prev.selectedTones.filter(t => t !== tone)
+        : [...prev.selectedTones, tone]
+    }));
   };
 
   // Parallax background scroll effect
@@ -375,8 +461,13 @@ export default function CharacterPage() {
                         <div className="text-blue-800 font-riscada text-sm sm:text-lg mb-2 break-words">
                           {img.alt?.slice(0, 120) || 'Untitled'}
                         </div>
+                        {img.source === 'user-upload' && img.artistName && (
+                          <div className="text-blue-600 text-xs sm:text-sm font-riscada mb-1">
+                            by {img.artistName}
+                          </div>
+                        )}
                         <div className="text-blue-400 text-xs sm:text-sm font-riscada">
-                          {img.source}
+                          {img.source === 'user-upload' ? 'Community Upload' : img.source}
                         </div>
                       </div>
                     </div>
@@ -385,7 +476,145 @@ export default function CharacterPage() {
               })}
             </div>
           )}
+          
+          {/* Upload Button */}
+          <div className="flex justify-center mt-8 sm:mt-12">
+            <button
+              onClick={() => setShowUploadModal(true)}
+              className="flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 hover:bg-blue-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110"
+              aria-label="Upload your artwork"
+              style={{backgroundColor: "#e5a1e7"}}
+            >
+              <svg className="w-8 h-8 sm:w-10 sm:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+              </svg>
+            </button>
+          </div>
         </section>
+      )}
+
+      {/* Upload Modal */}
+      {showUploadModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+            <div className="p-6">
+              <div className="flex justify-between items-center mb-6">
+                <h3 className="text-2xl font-riscada text-blue-800">Share Your Art :]</h3>
+                <button
+                  onClick={() => setShowUploadModal(false)}
+                  className="text-gray-500 hover:text-gray-700 text-2xl"
+                >
+                  ×
+                </button>
+              </div>
+              
+              <form onSubmit={handleImageUpload} className="space-y-4">
+                <div>
+                  <label className="block text-blue-800 font-medium mb-2 text-lg font-riscada">Your Name *</label>
+                  <input
+                    type="text"
+                    value={uploadForm.artistName}
+                    onChange={(e) => setUploadForm({...uploadForm, artistName: e.target.value})}
+                    className="w-full p-3 border-2 border-blue-300 rounded-lg bg-white text-blue-800 font-riscada text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
+                    placeholder="Artist Name"
+                    required
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-blue-800 font-medium mb-2 text-lg font-riscada">Image Link (Optional)</label>
+                  <input
+                    type="url"
+                    value={uploadForm.imageLink}
+                    onChange={(e) => setUploadForm({...uploadForm, imageLink: e.target.value})}
+                    className="w-full p-3 border-2 border-blue-300 rounded-lg bg-white text-blue-800 font-riscada text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
+                    placeholder="https://your-artwork-link.com"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-blue-800 font-medium mb-2 text-lg font-riscada">Genres *</label>
+                  <div className="grid grid-cols-2 gap-2">
+                    {['Fantasy', 'Cyberpunk', 'Horror', 'Adventure', 'Post-Apocalyptic'].map((g) => (
+                      <button
+                        key={g}
+                        type="button"
+                        onClick={() => toggleGenre(g)}
+                        className={`p-2 rounded-lg border-2 font-riscada text-sm transition-all ${
+                          uploadForm.selectedGenres.includes(g)
+                            ? 'bg-blue-600 text-white border-blue-600'
+                            : 'bg-white text-blue-800 border-blue-300 hover:border-blue-500'
+                        }`}
+                      >
+                        {g}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                
+                <div>
+                  <label className="block text-blue-800 font-medium mb-2 text-lg font-riscada">Tones *</label>
+                  <div className="grid grid-cols-2 gap-2">
+                    {['Whimsical', 'Creepy', 'Dramatic', 'Peaceful', 'Mysterious'].map((t) => (
+                      <button
+                        key={t}
+                        type="button"
+                        onClick={() => toggleTone(t)}
+                        className={`p-2 rounded-lg border-2 font-riscada text-sm transition-all ${
+                          uploadForm.selectedTones.includes(t)
+                            ? 'bg-blue-600 text-white border-blue-600'
+                            : 'bg-white text-blue-800 border-blue-300 hover:border-blue-500'
+                        }`}
+                      >
+                        {t}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                
+                <div>
+                  <label className="block text-blue-800 font-medium mb-2 text-lg font-riscada">Upload Image *</label>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => setUploadForm({...uploadForm, image: e.target.files?.[0] || null})}
+                    className="w-full p-3 border-2 border-blue-300 rounded-lg bg-white text-blue-800 font-riscada text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                    required
+                  />
+                </div>
+                
+                {uploadError && (
+                  <div className="text-red-600 font-riscada text-lg bg-red-50 p-3 rounded-lg">
+                    {uploadError}
+                  </div>
+                )}
+                
+                {uploadSuccess && (
+                  <div className="text-green-600 font-riscada text-lg bg-green-50 p-3 rounded-lg">
+                    Your artwork has been uploaded successfully!
+                  </div>
+                )}
+                
+                <div className="flex gap-3 pt-4">
+                  <button
+                    type="button"
+                    onClick={() => setShowUploadModal(false)}
+                    className="flex-1 px-4 py-3 bg-gray-300 text-gray-700 font-riscada text-lg rounded-lg hover:bg-gray-400 transition-all"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={uploading}
+                    className="flex-1 px-4 py-3 bg-blue-600 text-white font-riscada text-lg rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                  >
+                    {uploading ? 'Uploading...' : 'Upload'}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
       )}
 
       {/* FOOTER */}
