@@ -73,8 +73,15 @@ export async function POST(req: NextRequest) {
 
   } catch (error) {
     console.error('Upload error:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.error('Error details:', {
+      message: errorMessage,
+      stack: error instanceof Error ? error.stack : undefined,
+      uploadsDir: join(process.cwd(), 'public', 'uploads'),
+      exists: existsSync(join(process.cwd(), 'public', 'uploads'))
+    });
     return NextResponse.json(
-      { error: 'Failed to upload image' },
+      { error: `Failed to upload image: ${errorMessage}` },
       { status: 500 }
     );
   }
