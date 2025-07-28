@@ -1,10 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { v2 as cloudinary } from 'cloudinary';
 
-// Simple in-memory storage for development
-// In production, you'd use a database
-const uploads: any[] = [];
+// Configure Cloudinary
+cloudinary.config({
+  cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 export async function POST(req: NextRequest) {
+  console.log('Upload API called');
   try {
     const formData = await req.formData();
     const image = formData.get('image') as File;
@@ -13,7 +18,16 @@ export async function POST(req: NextRequest) {
     const genres = formData.get('genres') as string;
     const tones = formData.get('tones') as string;
 
+    console.log('Form data received:', { 
+      hasImage: !!image, 
+      artistName, 
+      imageLink, 
+      genres, 
+      tones 
+    });
+
     if (!image || !artistName || !genres || !tones) {
+      console.log('Missing required fields');
       return NextResponse.json(
         { error: 'Missing required fields' },
         { status: 400 }
@@ -28,37 +42,67 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Convert file to base64 for storage
+    // Convert file to buffer
     const bytes = await image.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    const base64 = buffer.toString('base64');
-    const dataUrl = `data:${image.type};base64,${base64}`;
 
-    // Create metadata object
+    // Upload to Cloudinary
+    console.log('Starting Cloudinary upload...');
+    console.log('Upload metadata:', { artistName, genres, tones, imageLink });
+    
+    const timestamp = Date.now();
+    const publicId = `inspo-${timestamp}`;
+    
+    const result = await new Promise((resolve, reject) => {
+      cloudinary.uploader.upload_stream(
+        {
+          folder: 'doodle-noodle-inspo',
+          public_id: publicId,
+          resource_type: 'image',
+          tags: [...genres.split(',').map((g: string) => g.trim()), ...tones.split(',').map((t: string) => t.trim())],
+        },
+        (error: any, result: any) => {
+          if (error) {
+            console.error('Cloudinary upload error:', error);
+            reject(error);
+          } else {
+            console.log('Cloudinary upload success:', result);
+            resolve(result);
+          }
+        }
+      ).end(buffer);
+    });
+
+    const cloudinaryResult = result as any;
+
+    // Store metadata in global scope for now
     const metadata = {
-      id: Date.now(),
+      publicId: cloudinaryResult.public_id,
       artistName,
       imageLink: imageLink || '',
       genres: genres.split(',').map((g: string) => g.trim()),
       tones: tones.split(',').map((t: string) => t.trim()),
-      uploadedAt: new Date().toISOString(),
-      dataUrl: dataUrl,
     };
 
-    // Store in memory (for development)
-    uploads.push(metadata);
-    (global as any).uploads = uploads;
+    // Store in global scope
+    if (!(global as any).uploadMetadata) {
+      (global as any).uploadMetadata = {};
+    }
+    (global as any).uploadMetadata[cloudinaryResult.public_id] = metadata;
+
+    console.log('Stored metadata for', cloudinaryResult.public_id, ':', metadata);
 
     return NextResponse.json({
       success: true,
       image: {
-        src: dataUrl,
+        src: cloudinaryResult.secure_url,
         alt: `Artwork by ${artistName}`,
         link: imageLink || '#',
         source: 'user-upload',
         artistName,
         genres: metadata.genres,
         tones: metadata.tones,
+        publicId: cloudinaryResult.public_id,
       }
     });
 
