@@ -67,27 +67,21 @@ export default function Home() {
                 onClick={() => handleTypeSelect('character')}
                 className="group bg-transparent rounded-xl p-0 border-none shadow-none text-center transform rotate-5 hover:rotate-0 transition-all duration-300 focus:outline-none relative overflow-hidden -translate-x-16 sm:translate-x-3 translate-y-2 sm:translate-y-6 min-h-[140px] sm:min-h-[220px]"
                 aria-label="Character Design"
-                onTouchStart={(e) => {
-                  e.currentTarget.classList.add('touch-active');
-                }}
-                onTouchEnd={(e) => {
-                  e.currentTarget.classList.remove('touch-active');
-                }}
               >
                 <span className="absolute inset-0 z-0">
                   <img 
                     src="/img/character.PNG" 
                     alt="Character Design" 
-                    className="transition-opacity duration-300 group-hover:opacity-0 group-[.touch-active]:opacity-0 object-contain scale-90 w-full h-full"
+                    className="transition-opacity duration-300 group-hover:opacity-0 object-contain scale-90 w-full h-full"
                   />
                   <img 
                     src="/img/character-folded.PNG" 
                     alt="Character Design Hover" 
-                    className="absolute inset-0 transition-opacity duration-300 opacity-0 group-hover:opacity-100 group-[.touch-active]:opacity-100 object-contain w-full h-full"
+                    className="absolute inset-0 transition-opacity duration-300 opacity-0 group-hover:opacity-100 object-contain w-full h-full"
                   />
                 </span>
                 {/* Overlay text on hover */}
-                <span className="absolute inset-0 flex flex-col items-center justify-center z-20 pointer-events-none opacity-100 sm:opacity-0 sm:group-hover:opacity-100 group-[.touch-active]:opacity-100 transition-opacity duration-300">
+                <span className="absolute inset-0 flex flex-col items-center justify-center z-20 pointer-events-none opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300">
                   <span className="text-lg sm:text-2xl md:text-3xl font-medium text-black-800 font-riscada px-4 sm:px-6 py-2 sm:py-3">
                     Character Design
                   </span>
@@ -98,27 +92,21 @@ export default function Home() {
                 onClick={() => handleTypeSelect('scene')}
                 className="group bg-transparent rounded-xl p-0 border-none shadow-none text-center transform -rotate-4 hover:rotate-0 transition-all duration-300 focus:outline-none relative overflow-hidden translate-x-12 sm:-translate-x-3 -translate-y-2 sm:translate-y-7 min-h-[140px] sm:min-h-[220px]"
                 aria-label="Scene Illustration"
-                onTouchStart={(e) => {
-                  e.currentTarget.classList.add('touch-active');
-                }}
-                onTouchEnd={(e) => {
-                  e.currentTarget.classList.remove('touch-active');
-                }}
               >
                 <span className="absolute inset-0 z-0">
                   <img 
                     src="/img/scene.PNG" 
                     alt="Scene Illustration" 
-                    className="transition-opacity duration-300 group-hover:opacity-0 group-[.touch-active]:opacity-0 object-contain scale-90 w-full h-full"
+                    className="transition-opacity duration-300 group-hover:opacity-0 object-contain scale-90 w-full h-full"
                   />
                   <img 
                     src="/img/scene-folded.PNG" 
                     alt="Scene Illustration Hover" 
-                    className="absolute inset-0 transition-opacity duration-300 opacity-0 group-hover:opacity-100 group-[.touch-active]:opacity-100 object-contain w-full h-full"
+                    className="absolute inset-0 transition-opacity duration-300 opacity-0 group-hover:opacity-100 object-contain w-full h-full"
                   />
                 </span>
                 {/* Overlay text on hover */}
-                <span className="absolute inset-0 flex flex-col items-center justify-center z-20 pointer-events-none opacity-100 sm:opacity-0 sm:group-hover:opacity-100 group-[.touch-active]:opacity-100 transition-opacity duration-300">
+                <span className="absolute inset-0 flex flex-col items-center justify-center z-20 pointer-events-none opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300">
                   <span className="text-lg sm:text-2xl md:text-3xl font-medium text-blue-800 font-riscada px-4 sm:px-6 py-2 sm:py-3">
                     Scene Illustration
                   </span>
@@ -129,27 +117,21 @@ export default function Home() {
                 onClick={() => handleTypeSelect('comic')}
                 className="group bg-transparent rounded-xl p-0 border-none shadow-none text-center transform rotate-8 sm:rotate-8 hover:rotate-0 transition-all duration-300 focus:outline-none relative overflow-hidden -translate-x-16 sm:-translate-x-5 -translate-y-8 sm:translate-y-14 min-h-[140px] sm:min-h-[220px]"
                 aria-label="Comic Strip"
-                onTouchStart={(e) => {
-                  e.currentTarget.classList.add('touch-active');
-                }}
-                onTouchEnd={(e) => {
-                  e.currentTarget.classList.remove('touch-active');
-                }}
               >
                 <span className="absolute inset-0 z-0">
                   <img 
                     src="/img/comic.PNG" 
                     alt="Comic Strip" 
-                    className="transition-opacity duration-300 group-hover:opacity-0 group-[.touch-active]:opacity-0 object-contain scale-90 w-full h-full"
+                    className="transition-opacity duration-300 group-hover:opacity-0 object-contain scale-90 w-full h-full"
                   />
                   <img 
                     src="/img/comic-folded.PNG" 
                     alt="Comic Strip Hover" 
-                    className="absolute inset-0 transition-opacity duration-300 opacity-0 group-hover:opacity-100 group-[.touch-active]:opacity-100 object-contain w-full h-full"
+                    className="absolute inset-0 transition-opacity duration-300 opacity-0 group-hover:opacity-100 object-contain w-full h-full"
                   />
                 </span>
                 {/* Overlay text on hover */}
-                <span className="absolute inset-0 flex flex-col items-center justify-center z-20 pointer-events-none opacity-100 sm:opacity-0 sm:group-hover:opacity-100 group-[.touch-active]:opacity-100 transition-opacity duration-300">
+                <span className="absolute inset-0 flex flex-col items-center justify-center z-20 pointer-events-none opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300">
                   <span className="text-lg sm:text-2xl md:text-3xl font-medium text-red-800 font-riscada px-4 sm:px-6 py-2 sm:py-3">
                     Comic Strip
                   </span>
