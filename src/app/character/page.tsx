@@ -314,7 +314,7 @@ export default function CharacterPage() {
 
         <div className="w-full md:w-[28rem] flex-shrink-0 flex items-start justify-center md:justify-end">
           {(prompt || displayedPrompt) && (
-            <div className="mt-4 sm:mt-8 md:mt-0 p-4 sm:p-6 bg text-black-800 font-riscada text-2xl sm:text-5xl max-w-2xl w-full relative translate-x-20 z-10 min-h-[4rem] sm:min-h-[6rem]">
+            <div className="mt-4 sm:mt-8 md:mt-0 p-4 sm:p-6 bg text-black-800 font-riscada text-2xl sm:text-5xl max-w-2xl w-full relative sm:translate-x-20 z-10 min-h-[4rem] sm:min-h-[6rem]">
               <span>{displayedPrompt}</span>
               <span className={isTyping ? 'animate-pulse' : ''} style={{fontWeight: 'bold'}}>{isTyping ? '|' : ''}</span>
             </div>
