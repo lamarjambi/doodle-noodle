@@ -56,6 +56,6 @@ GET `/api/inspo-images?genre={genre}&tone={tone}&keywords={keywords}`
 The project dependencies are listed in the `package.json` file.  Key dependencies include React, Next.js, and Tailwind CSS.
 
 ## Contribution
-Contribution to the sentences' library (corpora) is appreciated! Add text and make your own branch for me to check :] --
+Contribution to the sentences' library (corpora) is appreciated! Add text and make your own branch for me to check :]
 
 *README.md was made with [Etchr](https://etchr.dev)*
