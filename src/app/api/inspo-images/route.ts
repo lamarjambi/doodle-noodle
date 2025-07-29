@@ -83,10 +83,13 @@ async function fetchUserUploads(genre: string, tone: string) {
         return hasMatchingGenre || hasMatchingTone;
       })
       .map((metadata) => {
+        // For user uploads, we need to construct the Cloudinary URL from the publicId
+        const cloudinaryUrl = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/v1/${metadata.publicId}`;
+        
         return {
-          src: metadata.imageLink || '#',
+          src: cloudinaryUrl, // Always use Cloudinary URL for image display
           alt: `Artwork by ${metadata.artistName}`,
-          link: metadata.imageLink || '#',
+          link: metadata.imageLink || cloudinaryUrl, // Use user's link for clicking, fallback to Cloudinary
           source: 'user-upload',
           artistName: metadata.artistName,
           genres: metadata.genres,
