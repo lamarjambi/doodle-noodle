@@ -80,7 +80,7 @@ export async function POST(req: NextRequest) {
     const metadata = {
       publicId: cloudinaryResult.public_id,
       artistName,
-      imageLink: cloudinaryResult.secure_url, // Use Cloudinary URL as the image link
+      imageLink: imageLink || cloudinaryResult.secure_url, // Use user's link if provided, otherwise Cloudinary URL
       genres: genres.split(',').map((g: string) => g.trim()),
       tones: tones.split(',').map((t: string) => t.trim()),
     };
@@ -112,13 +112,13 @@ export async function POST(req: NextRequest) {
         type: 'upload',
         context: {
           artist_name: artistName,
-          image_link: cloudinaryResult.secure_url,
+          image_link: imageLink || cloudinaryResult.secure_url,
           genres: genres,
           tones: tones,
         },
         custom_metadata: {
           artist_name: artistName,
-          image_link: cloudinaryResult.secure_url,
+          image_link: imageLink || cloudinaryResult.secure_url,
           genres: genres,
           tones: tones,
         },
@@ -133,9 +133,9 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({
       success: true,
       image: {
-        src: cloudinaryResult.secure_url,
+        src: cloudinaryResult.secure_url, // Image source is always Cloudinary URL
         alt: `Artwork by ${artistName}`,
-        link: imageLink || cloudinaryResult.secure_url,
+        link: imageLink || cloudinaryResult.secure_url, // Link is user's link or Cloudinary URL
         source: 'user-upload',
         artistName,
         genres: metadata.genres,
