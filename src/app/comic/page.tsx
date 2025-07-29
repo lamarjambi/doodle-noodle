@@ -182,6 +182,16 @@ export default function ComicPage() {
 
   // Modified handleGenerate to show inspiration section
   const handleGenerate = () => {
+    // Validate required fields
+    if (!genre || genre === 'Choose a genre...') {
+      alert('Please select a genre');
+      return;
+    }
+    if (!tone || tone === 'Pick a tone...') {
+      alert('Please select a tone');
+      return;
+    }
+    
     let genreSentence = getRandomSentence(genreCorpus);
     let toneSentence = getRandomSentence(toneCorpus);
     let promptParts = [];

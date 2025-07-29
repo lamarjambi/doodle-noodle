@@ -184,6 +184,21 @@ export default function CharacterPage() {
 
   // Modified handleGenerate to show inspiration section
   const handleGenerate = () => {
+    console.log('Generate clicked - Genre:', genre, 'Tone:', tone);
+    
+    // Validate required fields
+    if (!genre || genre === 'Choose a genre...') {
+      console.log('Genre validation failed');
+      alert('Please select a genre');
+      return;
+    }
+    if (!tone || tone === 'Pick a tone...') {
+      console.log('Tone validation failed');
+      alert('Please select a tone');
+      return;
+    }
+    
+    console.log('Validation passed, generating prompt...');
     let genreSentence = getRandomSentence(genreCorpus);
     let toneSentence = getRandomSentence(toneCorpus);
     let promptParts = [];
@@ -382,9 +397,19 @@ export default function CharacterPage() {
               </div>
             </div>
             <div className="mt-6 sm:mt-8 text-center relative z-10 -translate-y-4 -translate-x-4">
-              <button onClick={handleGenerate} className="group relative hover:scale-105 transition-all duration-300 rotate-1 hover:rotate-0 bg-transparent focus:outline-none sm:translate-x-10" aria-label="Generate"
+              <button 
+                onClick={handleGenerate} 
+                disabled={!genre || genre === 'Choose a genre...' || !tone || tone === 'Pick a tone...'}
+                className={`group relative transition-all duration-300 rotate-1 focus:outline-none sm:translate-x-10 ${
+                  (!genre || genre === 'Choose a genre...' || !tone || tone === 'Pick a tone...') 
+                    ? 'opacity-50 cursor-not-allowed' 
+                    : 'hover:scale-105 hover:rotate-0'
+                }`} 
+                aria-label="Generate"
                 onTouchStart={(e) => {
-                  e.currentTarget.classList.add('touch-active');
+                  if (!e.currentTarget.disabled) {
+                    e.currentTarget.classList.add('touch-active');
+                  }
                 }}
                 onTouchEnd={(e) => {
                   e.currentTarget.classList.remove('touch-active');
