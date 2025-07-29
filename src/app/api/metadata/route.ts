@@ -1,8 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-
-// Simple in-memory metadata storage
-// In production, use a database
-const metadataStore: { [key: string]: any } = {};
+import { prisma } from '@/lib/prisma';
 
 export async function POST(req: NextRequest) {
   try {
@@ -16,18 +13,27 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Store metadata
-    metadataStore[publicId] = {
-      artistName,
-      imageLink: imageLink || '',
-      genres: genres || [],
-      tones: tones || [],
-      uploadedAt: new Date().toISOString(),
-    };
+    // Store metadata in PostgreSQL database
+    const metadata = await prisma.imageMetadata.upsert({
+      where: { publicId },
+      update: {
+        artistName,
+        imageLink: imageLink || '',
+        genres: genres || [],
+        tones: tones || [],
+      },
+      create: {
+        publicId,
+        artistName,
+        imageLink: imageLink || '',
+        genres: genres || [],
+        tones: tones || [],
+      },
+    });
 
-    console.log('Stored metadata for', publicId, ':', metadataStore[publicId]);
+    console.log('Stored metadata for', publicId, ':', metadata);
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, metadata });
   } catch (error) {
     console.error('Metadata storage error:', error);
     return NextResponse.json(
@@ -43,8 +49,17 @@ export async function GET(req: NextRequest) {
     const publicId = searchParams.get('publicId');
 
     if (!publicId) {
-      return NextResponse.json({ metadata: metadataStore });
+      // Return all metadata if no specific publicId
+      const allMetadata = await prisma.imageMetadata.findMany({
+        orderBy: { uploadedAt: 'desc' }
+      });
+      return NextResponse.json({ metadata: allMetadata });
     }
+
+    // Get specific metadata from database
+    const metadata = await prisma.imageMetadata.findUnique({
+      where: { publicId }
+    });
 
     // Try to get metadata from Cloudinary as well
     try {
@@ -66,17 +81,13 @@ export async function GET(req: NextRequest) {
         public_id: result.public_id,
         secure_url: result.secure_url
       };
-
-      const localMetadata = metadataStore[publicId];
       
       return NextResponse.json({ 
-        metadata: localMetadata,
+        metadata,
         cloudinaryMetadata: cloudinaryMetadata,
-        globalMetadata: (global as any).uploadMetadata?.[publicId]
       });
     } catch (cloudinaryError) {
       console.error('Error fetching from Cloudinary:', cloudinaryError);
-      const metadata = metadataStore[publicId];
       return NextResponse.json({ metadata });
     }
   } catch (error) {
