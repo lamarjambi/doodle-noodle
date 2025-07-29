@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { v2 as cloudinary } from 'cloudinary';
+import { prisma } from '@/lib/prisma';
 
 // Configure Cloudinary
 cloudinary.config({
@@ -75,24 +76,29 @@ export async function POST(req: NextRequest) {
 
     const cloudinaryResult = result as any;
 
-    // Store metadata in global scope for now
+    // Store metadata in PostgreSQL database
     const metadata = {
       publicId: cloudinaryResult.public_id,
       artistName,
-      imageLink: imageLink || '',
+      imageLink: cloudinaryResult.secure_url, // Use Cloudinary URL as the image link
       genres: genres.split(',').map((g: string) => g.trim()),
       tones: tones.split(',').map((t: string) => t.trim()),
     };
 
-    // Store in global scope
-    if (!(global as any).uploadMetadata) {
-      (global as any).uploadMetadata = {};
-    }
-    (global as any).uploadMetadata[cloudinaryResult.public_id] = metadata;
+    // Save to database
+    const savedMetadata = await prisma.imageMetadata.create({
+      data: {
+        publicId: metadata.publicId,
+        artistName: metadata.artistName,
+        imageLink: metadata.imageLink,
+        genres: metadata.genres,
+        tones: metadata.tones,
+      }
+    });
 
-    console.log('Stored metadata for', cloudinaryResult.public_id, ':', metadata);
+    console.log('Saved metadata to database:', savedMetadata);
 
-    // Store metadata in Cloudinary context for persistence
+    // Store metadata in Cloudinary context for backup
     try {
       const cloudinary = await import('cloudinary');
       cloudinary.v2.config({
@@ -106,13 +112,13 @@ export async function POST(req: NextRequest) {
         type: 'upload',
         context: {
           artist_name: artistName,
-          image_link: imageLink || '',
+          image_link: cloudinaryResult.secure_url,
           genres: genres,
           tones: tones,
         },
         custom_metadata: {
           artist_name: artistName,
-          image_link: imageLink || '',
+          image_link: cloudinaryResult.secure_url,
           genres: genres,
           tones: tones,
         },
@@ -129,7 +135,7 @@ export async function POST(req: NextRequest) {
       image: {
         src: cloudinaryResult.secure_url,
         alt: `Artwork by ${artistName}`,
-        link: imageLink || '#',
+        link: imageLink || cloudinaryResult.secure_url,
         source: 'user-upload',
         artistName,
         genres: metadata.genres,
