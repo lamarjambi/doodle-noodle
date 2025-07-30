@@ -556,9 +556,12 @@ export default function ComicPage() {
                         onClick={() => toggleGenre(g)}
                         className={`p-2 rounded-lg border-2 font-riscada text-sm transition-all ${
                           uploadForm.selectedGenres.includes(g)
-                            ? 'bg-blue-600 text-white border-blue-600'
+                            ? 'text-white border-[#8587ed]'
                             : 'bg-white text-blue-800 border-blue-300 hover:border-blue-500'
                         }`}
+                        style={{
+                          backgroundColor: uploadForm.selectedGenres.includes(g) ? '#8587ed' : 'transparent'
+                        }}
                       >
                         {g}
                       </button>
@@ -576,9 +579,12 @@ export default function ComicPage() {
                         onClick={() => toggleTone(t)}
                         className={`p-2 rounded-lg border-2 font-riscada text-sm transition-all ${
                           uploadForm.selectedTones.includes(t)
-                            ? 'bg-blue-600 text-white border-blue-600'
+                            ? 'text-white border-[#8587ed]'
                             : 'bg-white text-blue-800 border-blue-300 hover:border-blue-500'
                         }`}
+                        style={{
+                          backgroundColor: uploadForm.selectedTones.includes(t) ? '#8587ed' : 'transparent'
+                        }}
                       >
                         {t}
                       </button>
@@ -622,7 +628,10 @@ export default function ComicPage() {
                   <button
                     type="submit"
                     disabled={uploading}
-                    className="flex-1 px-4 py-3 bg-blue-600 text-white font-riscada text-lg rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                    className="flex-1 px-4 py-3 text-white font-riscada text-lg rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                    style={{
+                      backgroundColor: '#8587ed'
+                    }}
                   >
                     {uploading ? 'Uploading...' : 'Upload'}
                   </button>
